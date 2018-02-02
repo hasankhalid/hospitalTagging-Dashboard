@@ -13,6 +13,7 @@ import {
   CardHorizontalBlock
 } from 'rmwc/Card';
 import MdLocalHospital from 'react-icons/lib/md/local-hospital'
+import { Elevation } from 'rmwc/Elevation';
 
 class HospitalList extends Component {
 
@@ -57,22 +58,24 @@ class HospitalList extends Component {
         </GridCell>
           {this.hospitals.length > 0 && this.hospitals.map((hospital) => (
             <GridCell span="4" key={hospital.name}>
-              <Card>
-                <CardHorizontalBlock>
-                  <CardPrimary>
-                    <CardTitle large> {hospital.name}</CardTitle>
-                    <CardSubtitle>Visited: {hospital.visited ? 'Yes' : 'No'}</CardSubtitle>
-                  </CardPrimary>
-                  <CardMediaItem src="https://i2.wp.com/www.oceanviewumc.com/wp-content/uploads/2016/02/sthescope.jpg?fit=356%2C429"/>
-                </CardHorizontalBlock>
-                <CardSupportingText>
-                  <span><strong>Equipment Tagged: {hospital.equipmentCount}</strong></span>
-                </CardSupportingText>
-                <CardActions>
-                  <CardAction unelevated>View All</CardAction>
-                  <CardAction unelevated>Browse by Department</CardAction>
-                </CardActions>
-              </Card>
+              <Elevation z={3}>
+                <Card>
+                  <CardHorizontalBlock>
+                    <CardPrimary>
+                      <CardTitle large> {hospital.name}</CardTitle>
+                      <CardSubtitle>Visited: {hospital.visited ? 'Yes' : 'No'}</CardSubtitle>
+                    </CardPrimary>
+                    <CardMediaItem src="https://i2.wp.com/www.oceanviewumc.com/wp-content/uploads/2016/02/sthescope.jpg?fit=356%2C429"/>
+                  </CardHorizontalBlock>
+                  <CardSupportingText>
+                    <span><strong>Equipment Tagged: {hospital.equipmentCount}</strong></span>
+                  </CardSupportingText>
+                  <CardActions>
+                    <CardAction unelevated>View All</CardAction>
+                    <CardAction unelevated>Browse by Department</CardAction>
+                  </CardActions>
+                </Card>
+              </Elevation>
             </GridCell>
           ))}
       </Grid>
