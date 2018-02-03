@@ -14,6 +14,7 @@ import {
 } from 'rmwc/Card';
 import MdLocalHospital from 'react-icons/lib/md/local-hospital'
 import { Elevation } from 'rmwc/Elevation';
+import { Link } from 'react-router-dom'
 
 class HospitalList extends Component {
 
@@ -21,32 +22,44 @@ class HospitalList extends Component {
     {
       name: 'Hospital1',
       visited: true,
-      equipmentCount: 2
+      equipmentCount: 2,
+      wardeqCount: 3,
+      electriEqCount: 5
     },
     {
       name: 'Hospital2',
       visited: false,
-      equipmentCount: 4
+      equipmentCount: 4,
+      wardeqCount: 6,
+      electriEqCount: 4
     },
     {
       name: 'Hospital3',
       visited: true,
-      equipmentCount: 2
+      equipmentCount: 2,
+      wardeqCount: 5,
+      electriEqCount: 9
     },
     {
       name: 'Hospital4',
       visited: false,
-      equipmentCount: 5
+      equipmentCount: 5,
+      wardeqCount: 1,
+      electriEqCount: 9
     },
     {
       name: 'Hospital5',
       visited: true,
-      equipmentCount: 2
+      equipmentCount: 2,
+      wardeqCount: 2,
+      electriEqCount: 4
     },
     {
       name: 'Hospital6',
       visited: false,
-      equipmentCount: 12
+      equipmentCount: 12,
+      wardeqCount: 8,
+      electriEqCount: 9
     }
   ]
 
@@ -68,11 +81,21 @@ class HospitalList extends Component {
                     <CardMediaItem src="https://i2.wp.com/www.oceanviewumc.com/wp-content/uploads/2016/02/sthescope.jpg?fit=356%2C429"/>
                   </CardHorizontalBlock>
                   <CardSupportingText>
-                    <span><strong>Equipment Tagged: {hospital.equipmentCount}</strong></span>
+                    <span><strong>
+                      Equipment Tagged: <br/>
+                    </strong>
+                      Biomedical Equipment: {hospital.equipmentCount}<br/>
+                      Electrical Equipment: {hospital.electriEqCount}<br/>
+                      Hospital Equipment: {hospital.wardeqCount}
+                  </span>
                   </CardSupportingText>
                   <CardActions>
-                    <CardAction unelevated>View All</CardAction>
-                    <CardAction unelevated>Browse by Department</CardAction>
+                    <Link className="cardButton" to = "/hospital">
+                      <CardAction unelevated>View All</CardAction>
+                    </Link>
+                    <Link className="cardButton" to = "/hospital">
+                      <CardAction unelevated>Browse by Department</CardAction>
+                    </Link>
                   </CardActions>
                 </Card>
               </Elevation>

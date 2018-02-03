@@ -20,20 +20,18 @@ import {
 } from 'rmwc/List';
 
 import { Ripple } from 'rmwc/Ripple';
+import { Link } from 'react-router-dom'
 
 class NavBar extends Component {
-
-
-
   render () {
     return (
       <div>
         <Toolbar>
           <ToolbarRow>
             <ToolbarSection alignStart>
-              <Ripple accent>
-                  <ToolbarMenuIcon use="dashboard"/>
-              </Ripple>
+                <Ripple accent>
+                    <ToolbarMenuIcon use="dashboard"/>
+                </Ripple>
               <ToolbarTitle>DashBoard</ToolbarTitle>
             </ToolbarSection>
             <ToolbarSection alignEnd>

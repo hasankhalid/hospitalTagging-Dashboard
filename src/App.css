@@ -30,6 +30,20 @@
   padding-right: 20px;
 }
 
+.cardButton {
+  margin-right: 5px;
+}
+
+.footer {
+  background-color: #6200ee;
+  color: white;
+}
+
+.title {
+  text-align: center;
+  padding-bottom: 8px;
+}
+
 @media screen and (max-width: 643px) {
   .titleWrapper {
     display: block;

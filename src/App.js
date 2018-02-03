@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
 import NavBar from './components/navbar'
-import Reach from './components/reach'
-import Title from './components/title'
-import HospitalList from './components/hospitals'
+import Home from './views/home'
+import { Route } from 'react-router-dom'
+import HospitalView from './views/hospital'
+import Footer from './components/footer'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <NavBar/>
-        <Title/>
-        <Reach/>
-        <HospitalList/>
+        <Route exact path ="/" component={Home}/>
+        <Route exact path ="/hospital" component={HospitalView}/>
+        <Footer/>
       </div>
     );
   }
