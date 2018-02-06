@@ -93,7 +93,7 @@ class HospitalList extends Component {
                     <Link className="cardButton" to = "/hospital">
                       <CardAction unelevated>View All</CardAction>
                     </Link>
-                    <Link className="cardButton" to = "/hospital">
+                    <Link className="cardButton" to = "/byDepartment">
                       <CardAction unelevated>Browse by Department</CardAction>
                     </Link>
                   </CardActions>
