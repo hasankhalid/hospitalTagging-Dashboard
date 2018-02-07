@@ -67,6 +67,10 @@
   overflow-x: scroll;
 }
 
+.charContain {
+  display: flex;
+}
+
 
 @media screen and (max-width: 643px) {
   .titleWrapper {
