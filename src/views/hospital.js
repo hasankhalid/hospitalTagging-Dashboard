@@ -142,7 +142,7 @@ class HospitalView extends Component {
             <DialogSurface>
               <DialogHeader>
                 <DialogHeaderTitle>Equipment</DialogHeaderTitle>
-                <Button onClick={(e) =>this.toggleView()} unelevated>Switch View</Button>
+                <Button onClick={(e) =>this.toggleView()} dense>Switch View</Button>
               </DialogHeader>
               {this.state.viewDetail === true ?
               <DialogBody>
@@ -151,31 +151,31 @@ class HospitalView extends Component {
                   <div className = "list">
                     <List nonInteractive>
                       <ListItem>
-                        <ListItemGraphic>star_border</ListItemGraphic>
+                        <ListItemGraphic>text_fields</ListItemGraphic>
                         <ListItemText>Name: </ListItemText>
                       </ListItem>
                       <ListItem>
-                        <ListItemGraphic>favorite_border</ListItemGraphic>
+                        <ListItemGraphic>credit_card</ListItemGraphic>
                         <ListItemText>Serial No: </ListItemText>
                       </ListItem>
                       <ListItem>
-                        <ListItemGraphic>mood</ListItemGraphic>
+                        <ListItemGraphic>filter_2</ListItemGraphic>
                         <ListItemText>Model: </ListItemText>
                       </ListItem>
                       <ListItem>
-                        <ListItemGraphic>star_border</ListItemGraphic>
+                        <ListItemGraphic>event</ListItemGraphic>
                         <ListItemText>Make/Origin: </ListItemText>
                       </ListItem>
                       <ListItem>
-                        <ListItemGraphic>favorite_border</ListItemGraphic>
+                        <ListItemGraphic>date_range</ListItemGraphic>
                         <ListItemText>Year of Manufacture: </ListItemText>
                       </ListItem>
                       <ListItem>
-                        <ListItemGraphic>mood</ListItemGraphic>
+                        <ListItemGraphic>business</ListItemGraphic>
                         <ListItemText>Department: </ListItemText>
                       </ListItem>
                       <ListItem>
-                        <ListItemGraphic>favorite_border</ListItemGraphic>
+                        <ListItemGraphic>location_city</ListItemGraphic>
                         <ListItemText className="scroll">Hospital/Facility: </ListItemText>
                       </ListItem>
                     </List>
@@ -183,31 +183,31 @@ class HospitalView extends Component {
                   <div className = "list">
                     <List nonInteractive>
                     <ListItem>
-                      <ListItemGraphic>star_border</ListItemGraphic>
+                      <ListItemGraphic>warning</ListItemGraphic>
                       <ListItemText>Functional Status: </ListItemText>
                     </ListItem>
                     <ListItem>
-                      <ListItemGraphic>favorite_border</ListItemGraphic>
+                      <ListItemGraphic>check</ListItemGraphic>
                       <ListItemText>Maintenance Status: </ListItemText>
                     </ListItem>
                     <ListItem>
-                      <ListItemGraphic>mood</ListItemGraphic>
+                      <ListItemGraphic>check</ListItemGraphic>
                       <ListItemText>Warranty Status: </ListItemText>
                     </ListItem>
                     <ListItem>
-                      <ListItemGraphic>star_border</ListItemGraphic>
+                      <ListItemGraphic>build</ListItemGraphic>
                       <ListItemText className="scroll">Maintenance Provider: GAT Consulting/MN Export</ListItemText>
                     </ListItem>
                     <ListItem>
-                      <ListItemGraphic>favorite_border</ListItemGraphic>
+                      <ListItemGraphic>local_shipping</ListItemGraphic>
                       <ListItemText className="scroll">Supplier: </ListItemText>
                     </ListItem>
                     <ListItem>
-                      <ListItemGraphic>mood</ListItemGraphic>
+                      <ListItemGraphic>date_range</ListItemGraphic>
                       <ListItemText>Purchase Date: </ListItemText>
                     </ListItem>
                     <ListItem>
-                      <ListItemGraphic>mood</ListItemGraphic>
+                      <ListItemGraphic>date_range</ListItemGraphic>
                       <ListItemText>Installation Date: </ListItemText>
                     </ListItem>
                   </List>

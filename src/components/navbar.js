@@ -6,6 +6,7 @@ import {
   ToolbarTitle,
   ToolbarMenuIcon,
 } from 'rmwc/Toolbar';
+import {Link} from 'react-router-dom'
 
 import { Ripple } from 'rmwc/Ripple';
 
@@ -17,7 +18,9 @@ class NavBar extends Component {
           <ToolbarRow>
             <ToolbarSection alignStart>
                 <Ripple accent>
+                  <Link to="/" style={{textDecoration: 'none', color: 'white'}}>
                     <ToolbarMenuIcon use="dashboard"/>
+                  </Link>
                 </Ripple>
               <ToolbarTitle>DashBoard</ToolbarTitle>
             </ToolbarSection>
