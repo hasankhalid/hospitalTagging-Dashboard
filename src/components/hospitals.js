@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Grid, GridCell } from 'rmwc/Grid'
 import {
   Card,
-  CardMedia,
   CardMediaItem,
   CardPrimary,
   CardTitle,
@@ -12,7 +11,6 @@ import {
   CardAction,
   CardHorizontalBlock
 } from 'rmwc/Card';
-import MdLocalHospital from 'react-icons/lib/md/local-hospital'
 import { Elevation } from 'rmwc/Elevation';
 import { Link } from 'react-router-dom'
 

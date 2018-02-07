@@ -7,20 +7,7 @@ import {
   ToolbarMenuIcon,
 } from 'rmwc/Toolbar';
 
-import {
-  Drawer,
-  DrawerHeader,
-  DrawerContent
-} from 'rmwc/Drawer';
-
-import {
-  ListItem,
-  ListItemText,
-  ListItemGraphic
-} from 'rmwc/List';
-
 import { Ripple } from 'rmwc/Ripple';
-import { Link } from 'react-router-dom'
 
 class NavBar extends Component {
   render () {
