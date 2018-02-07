@@ -63,6 +63,11 @@
   padding-bottom: 8px;
 }
 
+.scroll {
+  overflow-x: scroll;
+}
+
+
 @media screen and (max-width: 643px) {
   .titleWrapper {
     display: block;

@@ -5,10 +5,10 @@ import { TabBar, Tab, TabIcon, TabIconText, TabBarScroller} from 'rmwc/Tabs';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import { Elevation } from 'rmwc/Elevation';
+import { Button } from 'rmwc/Button';
 
 import {
   Dialog,
-  DefaultDialogTemplate,
   DialogSurface,
   DialogHeader,
   DialogHeaderTitle,
@@ -22,7 +22,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemSecondaryText,
   ListItemGraphic,
 } from 'rmwc/List';
 
@@ -77,6 +76,7 @@ class HospitalView extends Component {
     }],
     tabs: [],
     standardDialogOpen: false,
+    viewDetail: false,
     rows: [{
         serial: 'biomedical',
         name: 'Equipment',
@@ -87,6 +87,11 @@ class HospitalView extends Component {
         name: 'Equipment',
         model: '2002',
         department: 'Department'}],
+  }
+
+  toggleView = () => {
+    const reverse = !this.state.viewDetail;
+    this.setState({viewDetail: reverse})
   }
 
   render () {
@@ -137,7 +142,9 @@ class HospitalView extends Component {
             <DialogSurface>
               <DialogHeader>
                 <DialogHeaderTitle>Equipment</DialogHeaderTitle>
+                <Button onClick={(e) =>this.toggleView()} unelevated>Switch View</Button>
               </DialogHeader>
+              {this.state.viewDetail === true ?
               <DialogBody>
                 <h4>These are equipment details</h4>
                 <div className = "listContain">
@@ -145,35 +152,31 @@ class HospitalView extends Component {
                     <List nonInteractive>
                       <ListItem>
                         <ListItemGraphic>star_border</ListItemGraphic>
-                        <ListItemText>Cookies</ListItemText>
+                        <ListItemText>Name: </ListItemText>
                       </ListItem>
                       <ListItem>
                         <ListItemGraphic>favorite_border</ListItemGraphic>
-                        <ListItemText>Pizza</ListItemText>
+                        <ListItemText>Serial No: </ListItemText>
                       </ListItem>
                       <ListItem>
                         <ListItemGraphic>mood</ListItemGraphic>
-                        <ListItemText>Icecream</ListItemText>
+                        <ListItemText>Model: </ListItemText>
                       </ListItem>
                       <ListItem>
                         <ListItemGraphic>star_border</ListItemGraphic>
-                        <ListItemText>Cookies</ListItemText>
+                        <ListItemText>Make/Origin: </ListItemText>
                       </ListItem>
                       <ListItem>
                         <ListItemGraphic>favorite_border</ListItemGraphic>
-                        <ListItemText>Pizza</ListItemText>
+                        <ListItemText>Year of Manufacture: </ListItemText>
                       </ListItem>
                       <ListItem>
                         <ListItemGraphic>mood</ListItemGraphic>
-                        <ListItemText>Icecream</ListItemText>
+                        <ListItemText>Department: </ListItemText>
                       </ListItem>
                       <ListItem>
                         <ListItemGraphic>favorite_border</ListItemGraphic>
-                        <ListItemText>Pizza</ListItemText>
-                      </ListItem>
-                      <ListItem>
-                        <ListItemGraphic>mood</ListItemGraphic>
-                        <ListItemText>Icecream</ListItemText>
+                        <ListItemText className="scroll">Hospital/Facility: </ListItemText>
                       </ListItem>
                     </List>
                   </div>
@@ -181,20 +184,53 @@ class HospitalView extends Component {
                     <List nonInteractive>
                     <ListItem>
                       <ListItemGraphic>star_border</ListItemGraphic>
-                      <ListItemText>Cookies</ListItemText>
+                      <ListItemText>Functional Status: </ListItemText>
                     </ListItem>
                     <ListItem>
                       <ListItemGraphic>favorite_border</ListItemGraphic>
-                      <ListItemText>Pizza</ListItemText>
+                      <ListItemText>Maintenance Status: </ListItemText>
                     </ListItem>
                     <ListItem>
                       <ListItemGraphic>mood</ListItemGraphic>
-                      <ListItemText>Icecream</ListItemText>
+                      <ListItemText>Warranty Status: </ListItemText>
+                    </ListItem>
+                    <ListItem>
+                      <ListItemGraphic>star_border</ListItemGraphic>
+                      <ListItemText className="scroll">Maintenance Provider: GAT Consulting/MN Export</ListItemText>
+                    </ListItem>
+                    <ListItem>
+                      <ListItemGraphic>favorite_border</ListItemGraphic>
+                      <ListItemText className="scroll">Supplier: </ListItemText>
+                    </ListItem>
+                    <ListItem>
+                      <ListItemGraphic>mood</ListItemGraphic>
+                      <ListItemText>Purchase Date: </ListItemText>
+                    </ListItem>
+                    <ListItem>
+                      <ListItemGraphic>mood</ListItemGraphic>
+                      <ListItemText>Installation Date: </ListItemText>
                     </ListItem>
                   </List>
                 </div>
               </div>
               </DialogBody>
+
+              :
+
+              <DialogBody>
+                <div className = "modalImage">
+                  <div>
+                    <h3>Equipment Image</h3>
+                    <img src="http://via.placeholder.com/350x200" alt="equipment snapshot"/>
+                  </div>
+                  <div>
+                    <h3> QR Code </h3>
+                    <img src="http://via.placeholder.com/350x200" alt="QRe"/>
+                  </div>
+                </div>
+                <span className="comments"><strong>Enumerator Comments:</strong> The equipment is functional but requires more maintenance</span><br/>
+              </DialogBody>
+            }
               <DialogFooter>
                   <DialogFooterButton cancel>Close</DialogFooterButton>
               </DialogFooter>
