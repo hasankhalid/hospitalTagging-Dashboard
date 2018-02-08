@@ -3,6 +3,7 @@ import Reach from '../components/reach'
 import Title from '../components/title'
 import HospitalList from '../components/hospitals'
 import ComposedChart from '../components/composed'
+import StackedBarChart from '../components/warrantybar'
 
 class Home extends Component {
   render () {
@@ -10,9 +11,8 @@ class Home extends Component {
       <div>
         <Title/>
         <Reach/>
-        <div className="charContain">
-          <ComposedChart/>
-        </div>
+        <ComposedChart/>
+        <StackedBarChart/>
         <HospitalList/>
       </div>
     )

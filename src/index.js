@@ -10,7 +10,7 @@ import 'material-components-web/dist/material-components-web.min.css';
 ReactDOM.render(
   <RMWCProvider>
     <BrowserRouter>
-      <App />
+      <App style={{willChange: 'transform'}} />
     </BrowserRouter>
   </RMWCProvider>,
   document.getElementById('root'));
