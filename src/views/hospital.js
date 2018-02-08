@@ -7,23 +7,12 @@ import 'react-table/react-table.css';
 import { Elevation } from 'rmwc/Elevation';
 import { Button } from 'rmwc/Button';
 
-import {
-  Dialog,
-  DialogSurface,
-  DialogHeader,
-  DialogHeaderTitle,
-  DialogBody,
-  DialogFooter,
-  DialogFooterButton,
-  DialogBackdrop,
-} from 'rmwc/Dialog';
+import { Dialog, DialogSurface, DialogHeader, DialogHeaderTitle, DialogBody,
+         DialogFooter, DialogFooterButton, DialogBackdrop, } from 'rmwc/Dialog';
 
-import {
-  List,
-  ListItem,
-  ListItemText,
-  ListItemGraphic,
-} from 'rmwc/List';
+import { List, ListItem, ListItemText, ListItemGraphic } from 'rmwc/List';
+
+import { Drawer, DrawerHeader, DrawerContent } from 'rmwc/Drawer';
 
 class HospitalView extends Component {
 
@@ -37,13 +26,13 @@ class HospitalView extends Component {
 
   setTitle = () => {
     const path = this.props.location.pathname;
-    path === '/hospital' ? this.setState({ title: 'Category'
-    }) : this.setState({ title: 'Department'
-    })
+    path === '/hospital' ? this.setState({ title: 'Category'})
+    : this.setState({ title: 'Department'})
   }
 
   state = {
     activeTabIndex: 0,
+
     columns: [{
       Header: 'Serial-No',
       accessor: 'serial',
@@ -58,8 +47,8 @@ class HospitalView extends Component {
       Cell: props => <span className='number'>{props.value}</span>,
       filterable: true
     }, {
-      Header: 'Department',
-      accessor: 'department',
+      Header: 'Make/Origin',
+      accessor: 'make',
       filterable: true
     }, {
       Header: 'Date of Manufacture',
@@ -74,24 +63,79 @@ class HospitalView extends Component {
       accessor: 'funcstatus',
       filterable: true
     }],
+
     tabs: [],
     standardDialogOpen: false,
     viewDetail: false,
+
     rows: [{
         serial: 'biomedical',
         name: 'Equipment',
         model: '2002',
-        department: 'Department'},
+        make: 'Make'},
       {
         serial: 'biomedical',
         name: 'Equipment',
         model: '2002',
-        department: 'Department'}],
+        make: 'Make'}],
+    departments: [
+    {   label: 'Emergency',
+        value: '1' },{
+        label: 'Medical',
+        value: '2'},{
+        label: 'Surgery',
+        value: '3' },{
+        label: 'TB & Chest',
+        value: '4'},{
+        label: 'Eye',
+        value: '5'},{
+        label: 'ICU',
+        value: '6' },{
+        label: 'Dental',
+        value: '7'},{
+        label: 'Dialysis',
+        value: '8'},{
+        label: 'NNN',
+        value: '9' },{
+        label: 'PCR/Main Lab',
+        value: '10'},{
+        label: 'Gynae',
+        value: '11'},{
+        label: 'Dermatology',
+        value: '12' },{
+        label: 'Gastroscopy',
+        value: '13'},{
+        label: 'Radiology',
+        value: '14'},{
+        label: 'Physiotherapy',
+        value: '15' },{
+        label: 'Blood Bank',
+        value: '16'},{
+        label: 'Orthopaedic',
+        value: '17'},{
+        label: 'ENT',
+        value: '18' },{
+        label: 'PAEDS',
+        value: '19'},{
+        label: 'Special Treatment',
+        value: '20'},{
+        label: 'Psychiatry',
+        value: '21' }
+  ],
+    value: '1',
+    tempOpen: false
   }
 
   toggleView = () => {
     const reverse = !this.state.viewDetail;
     this.setState({viewDetail: reverse})
+  }
+
+  handleDrawerClick = (name) => {
+    this.setState({
+      tempOpen: false,
+    });
+    console.log(name)
   }
 
   render () {
@@ -108,18 +152,35 @@ class HospitalView extends Component {
               <Tab><TabIcon>local_hospital</TabIcon><TabIconText> Biomedical Equipment</TabIconText></Tab>
               <Tab><TabIcon>computer</TabIcon><TabIconText> Electrical Equipment</TabIconText></Tab>
               <Tab><TabIcon>local_hotel</TabIcon><TabIconText> Hospital Equipment</TabIconText></Tab>
+              <Tab><TabIcon>build</TabIcon><TabIconText> AC/Generator</TabIconText></Tab>
           </TabBar>
           </TabBarScroller>
           :
-          <TabBarScroller>
-          <TabBar
-            activeTabIndex={this.state.activeTabIndex}
-            onChange={evt => this.setState({'activeTabIndex': evt.target.value})}
+          <div>
+            <Button
+              onClick={() => this.setState({tempOpen: !this.state.tempOpen})}
+              raised
             >
-              <Tab><TabIcon>local_hospital</TabIcon><TabIconText> Biomedical Equipment</TabIconText></Tab>
-              <Tab><TabIcon>computer</TabIcon><TabIconText> Electrical Equipment</TabIconText></Tab>
-          </TabBar>
-          </TabBarScroller>
+              Select Department
+            </Button>
+            <Drawer
+              temporary
+              open={this.state.tempOpen}
+              onClose={() => this.setState({tempOpen: false})}
+            >
+              <DrawerHeader>
+               <ListItemGraphic size={40} style={{color: 'white'}}>business</ListItemGraphic>
+                Department List
+              </DrawerHeader>
+              <DrawerContent>
+              {this.state.departments.length > 0 && this.state.departments.map((department) => (
+                <ListItem onClick={(e) => this.handleDrawerClick(department.label)} key={department.value}>
+                  <ListItemText>{department.label}</ListItemText>
+                </ListItem>
+              ))}
+              </DrawerContent>
+            </Drawer>
+          </div>
         }
         </GridCell>
         <GridCell span = "12">

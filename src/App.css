@@ -75,10 +75,16 @@
   background-color: #6200ee;
   color: white;
   padding: 8px;
+  text-decoration: none;
 }
 
 .ReactTable {
   border: 0px;
+}
+
+.mdc-drawer__header {
+  background-color: #6200ee;
+  color: white;
 }
 
 .rt-td {
