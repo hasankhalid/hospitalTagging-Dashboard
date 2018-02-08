@@ -14,6 +14,8 @@ import { List, ListItem, ListItemText, ListItemGraphic } from 'rmwc/List';
 
 import { Drawer, DrawerHeader, DrawerContent } from 'rmwc/Drawer';
 
+import QRCode from 'qrcode.react';
+
 class HospitalView extends Component {
 
   componentDidMount() {
@@ -282,11 +284,17 @@ class HospitalView extends Component {
                 <div className = "modalImage">
                   <div>
                     <h3>Equipment Image</h3>
-                    <img src="http://via.placeholder.com/350x200" alt="equipment snapshot"/>
+                    <img src="http://via.placeholder.com/480x270" alt="equipment snapshot"/>
                   </div>
                   <div>
                     <h3> QR Code </h3>
-                    <img src="http://via.placeholder.com/350x200" alt="QRe"/>
+                    <QRCode
+                      value={"1"}
+                      size={270}
+                      bgColor={"#F2F1EF"}
+                      fgColor={"#5B3256"}
+                      level={"L"}
+                    />
                   </div>
                 </div>
                 <span className="comments"><strong>Enumerator Comments:</strong> The equipment is functional but requires more maintenance</span><br/>

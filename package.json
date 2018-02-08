@@ -8,6 +8,7 @@
     "@devexpress/dx-react-grid-material-ui": "^1.0.0",
     "deepmerge": "^2.0.1",
     "material-ui": "^0.20.0",
+    "qrcode.react": "^0.7.2",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-bootstrap-table": "^4.3.1",

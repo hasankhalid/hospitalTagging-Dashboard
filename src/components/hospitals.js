@@ -88,10 +88,10 @@ class HospitalList extends Component {
                   </span>
                   </CardSupportingText>
                   <CardActions>
-                    <Link className="cardButton" to = "/hospital">
+                    <Link to={{ pathname: '/hospital', state: { hospital: hospital.name} }} className="cardButton">
                       <CardAction unelevated>View All</CardAction>
                     </Link>
-                    <Link className="cardButton" to = "/byDepartment" >
+                    <Link className="cardButton" to={{ pathname: '/byDepartment', state: { hospital: hospital.name} }} >
                       <CardAction unelevated >Browse by Department</CardAction>
                     </Link>
                   </CardActions>
