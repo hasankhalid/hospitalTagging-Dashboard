@@ -4,6 +4,7 @@ import Title from '../components/title'
 import HospitalList from '../components/hospitals'
 import ComposedChart from '../components/composed'
 import StackedBarChart from '../components/warrantybar'
+import MaintenanceChart from '../components/maintenancebar'
 
 class Home extends Component {
   render () {
@@ -13,6 +14,7 @@ class Home extends Component {
         <Reach/>
         <ComposedChart/>
         <StackedBarChart/>
+        <MaintenanceChart/>
         <HospitalList/>
       </div>
     )
