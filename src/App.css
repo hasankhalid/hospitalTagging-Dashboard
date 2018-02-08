@@ -71,6 +71,21 @@
   display: flex;
 }
 
+.ReactTable .rt-thead.-header {
+  background-color: #6200ee;
+  color: white;
+  padding: 8px;
+}
+
+.ReactTable {
+  border: 0px;
+}
+
+.rt-td {
+  text-align: right;
+  padding: 4px;
+}
+
 
 @media screen and (max-width: 643px) {
   .titleWrapper {

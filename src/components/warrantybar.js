@@ -17,11 +17,7 @@ const data = [{name: 'Hospital A', Warranty: 600, WithoutWarranty: 400},
               {name: 'Hospital B', Warranty: 600, WithoutWarranty: 100},
               {name: 'Hospital C', Warranty: 750, WithoutWarranty: 200},
               {name: 'Hospital D', Warranty: 1200, WithoutWarranty: 50},
-              {name: 'Hospital E', Warranty: 700, WithoutWarranty: 50},
-              {name: 'Hospital F', Warranty: 1330, WithoutWarranty: 70},
-              {name: 'Hospital A', Warranty: 470, WithoutWarranty: 120},
-              {name: 'Hospital B', Warranty: 320, WithoutWarranty: 80},
-              {name: 'Hospital C', Warranty: 850, WithoutWarranty: 300}];
+              {name: 'Hospital E', Warranty: 700, WithoutWarranty: 50}];
 
 
 class StackedBarChart extends Component {

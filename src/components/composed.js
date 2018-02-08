@@ -17,11 +17,7 @@ const data = [{name: 'Hospital A', Recorded: 1000, Functional: 600, NonFunctiona
               {name: 'Hospital B', Recorded: 700, Functional: 600, NonFunctional: 100},
               {name: 'Hospital C', Recorded: 950, Functional: 750, NonFunctional: 200},
               {name: 'Hospital D', Recorded: 1250, Functional: 1200, NonFunctional: 50},
-              {name: 'Hospital E', Recorded: 750, Functional: 700, NonFunctional: 50},
-              {name: 'Hospital F', Recorded: 1400, Functional: 1330, NonFunctional: 70},
-              {name: 'Hospital A', Recorded: 590, Functional: 470, NonFunctional: 120},
-              {name: 'Hospital B', Recorded: 400, Functional: 320, NonFunctional: 80},
-              {name: 'Hospital C', Recorded: 1150, Functional: 850, NonFunctional: 300}];
+              {name: 'Hospital E', Recorded: 750, Functional: 700, NonFunctional: 50}];
 
 class StatusComposedChart extends Component {
 	render () {

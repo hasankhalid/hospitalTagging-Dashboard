@@ -17,11 +17,7 @@ const data = [{name: 'Hospital A', Maintained: 600, NotMaintained: 400},
               {name: 'Hospital B', Maintained: 600, NotMaintained: 100},
               {name: 'Hospital C', Maintained: 750, NotMaintained: 200},
               {name: 'Hospital D', Maintained: 1200, NotMaintained: 50},
-              {name: 'Hospital E', Maintained: 700, NotMaintained: 50},
-              {name: 'Hospital F', Maintained: 1330, NotMaintained: 70},
-              {name: 'Hospital A', Maintained: 470, NotMaintained: 120},
-              {name: 'Hospital B', Maintained: 320, NotMaintained: 80},
-              {name: 'Hospital C', Maintained: 850, NotMaintained: 300}];
+              {name: 'Hospital E', Maintained: 700, NotMaintained: 50}];
 
 
 class MaintenanceChart extends Component {
