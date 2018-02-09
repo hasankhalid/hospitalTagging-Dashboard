@@ -1,0 +1,28 @@
+{
+  "name": "hospitaltag",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@devexpress/dx-react-core": "^1.0.0",
+    "@devexpress/dx-react-grid": "^1.0.0",
+    "@devexpress/dx-react-grid-material-ui": "^1.0.0",
+    "deepmerge": "^2.0.1",
+    "material-ui": "^0.20.0",
+    "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
+    "react-bootstrap-table": "^4.3.1",
+    "react-dom": "^16.2.0",
+    "react-icons": "^2.2.7",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.0",
+    "react-table": "^6.7.6",
+    "rmwc": "^1.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

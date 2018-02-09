@@ -1,0 +1,66 @@
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 15px;
+}
+
+.govLogo {
+  height: 110px;
+  padding-right: 20px;
+}
+
+.cardButton {
+  margin-right: 5px;
+}
+
+.footer {
+  background-color: #6200ee;
+  color: white;
+}
+
+.title {
+  text-align: center;
+  padding-bottom: 8px;
+}
+
+@media screen and (max-width: 643px) {
+  .titleWrapper {
+    display: block;
+  }
+
+  .imageCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .textCenter {
+    text-align: center;
+  }
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
