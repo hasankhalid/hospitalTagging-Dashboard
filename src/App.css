@@ -92,7 +92,6 @@
   padding: 4px;
 }
 
-
 @media screen and (max-width: 643px) {
   .titleWrapper {
     display: block;
@@ -112,4 +111,9 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+canvas {
+    height: auto !important;
+    width: 100% !important;
 }

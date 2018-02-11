@@ -32,38 +32,42 @@ class HospitalView extends Component {
     : this.setState({ title: 'Department'})
   }
 
+  sliceArray = (array, half) => {
+    var half_length = Math.ceil(array.length / 2);
+
+    if (half === 0) {
+      return array.slice(0,half_length)
+    }
+    else {
+      return array.slice(half_length,array.length)
+    }
+  }
+
   state = {
     activeTabIndex: 0,
 
     columns: [{
       Header: 'Serial-No',
       accessor: 'serial',
-      filterable: true
     }, {
       Header: 'Name',
       accessor: 'name',
-      filterable: true
     }, {
       Header: 'Model',
       accessor: 'model',
       Cell: props => <span className='number'>{props.value}</span>,
-      filterable: true
     }, {
       Header: 'Make/Origin',
       accessor: 'make',
-      filterable: true
     }, {
       Header: 'Date of Manufacture',
       accessor: 'manufacturedate',
-      filterable: true
     }, {
       Header: 'Purchase Date',
       accessor: 'purchasedate',
-      filterable: true
     }, {
       Header: 'Functional Status',
       accessor: 'funcstatus',
-      filterable: true
     }],
 
     tabs: [],
@@ -71,7 +75,7 @@ class HospitalView extends Component {
     viewDetail: false,
 
     rows: [{
-        serial: 'biomedical',
+        serial: '1234',
         name: 'Equipment',
         model: '2002',
         make: 'Make'},
@@ -124,6 +128,38 @@ class HospitalView extends Component {
         label: 'Psychiatry',
         value: '21' }
   ],
+
+  params: [
+  {   label: 'Name: ',
+      icon: 'text_fields' },{
+      label: 'Serial No: ',
+      icon: 'credit_card'},{
+      label: 'Model: ',
+      icon: 'filter_2' },{
+      label: 'Make/Origin: ',
+      icon: 'event'},{
+      label: 'Year of Manufacture: ',
+      icon: 'date_range'},{
+      label: 'Department: ',
+      icon: 'business' },{
+      label: 'Hospital/Facility: ',
+      icon: 'location_city'},{
+      label: 'Functional Status: ',
+      icon: 'warning'},{
+      label: 'Maintenance Status: ',
+      icon: 'check' },{
+      label: 'Warranty Status: ',
+      icon: 'check'},{
+      label: 'Maintenance Provider: ',
+      icon: 'build'},{
+      label: 'Supplier: ',
+      icon: 'local_shipping' },{
+      label: 'Purchase Date: ',
+      icon: 'date_range'},{
+      label: 'Installation Date: ',
+      icon: 'date_range'}
+  ],
+
     value: '1',
     tempOpen: false
   }
@@ -141,6 +177,9 @@ class HospitalView extends Component {
   }
 
   render () {
+    const changeMe = this.state.params;
+    const firstHalf = this.sliceArray(changeMe,0);
+    const secondHalf = this.sliceArray(changeMe,1);
     return (
       <Grid>
         <GridCell span = "12">
@@ -191,6 +230,9 @@ class HospitalView extends Component {
           className="highlight"
             data={this.state.rows}
             columns={this.state.columns}
+            defaultPageSize={100}
+            pageSizeOptions={[20, 50, 100, 200, 300]}
+            filterable={true}
             getTdProps={(state, rowInfo, column, instance) => {
             return {
               onClick: (e) => {
@@ -213,82 +255,36 @@ class HospitalView extends Component {
                 <div className = "listContain">
                   <div className = "list">
                     <List nonInteractive>
+                    {firstHalf.length > 0 && firstHalf.map((param) => (
                       <ListItem>
-                        <ListItemGraphic>text_fields</ListItemGraphic>
-                        <ListItemText>Name: </ListItemText>
+                        <ListItemGraphic>{param.icon}</ListItemGraphic>
+                        <ListItemText className="scroll">{param.label}</ListItemText>
                       </ListItem>
-                      <ListItem>
-                        <ListItemGraphic>credit_card</ListItemGraphic>
-                        <ListItemText>Serial No: </ListItemText>
-                      </ListItem>
-                      <ListItem>
-                        <ListItemGraphic>filter_2</ListItemGraphic>
-                        <ListItemText>Model: </ListItemText>
-                      </ListItem>
-                      <ListItem>
-                        <ListItemGraphic>event</ListItemGraphic>
-                        <ListItemText>Make/Origin: </ListItemText>
-                      </ListItem>
-                      <ListItem>
-                        <ListItemGraphic>date_range</ListItemGraphic>
-                        <ListItemText>Year of Manufacture: </ListItemText>
-                      </ListItem>
-                      <ListItem>
-                        <ListItemGraphic>business</ListItemGraphic>
-                        <ListItemText>Department: </ListItemText>
-                      </ListItem>
-                      <ListItem>
-                        <ListItemGraphic>location_city</ListItemGraphic>
-                        <ListItemText className="scroll">Hospital/Facility: </ListItemText>
-                      </ListItem>
+                    ))}
                     </List>
                   </div>
                   <div className = "list">
                     <List nonInteractive>
-                    <ListItem>
-                      <ListItemGraphic>warning</ListItemGraphic>
-                      <ListItemText>Functional Status: </ListItemText>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemGraphic>check</ListItemGraphic>
-                      <ListItemText>Maintenance Status: </ListItemText>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemGraphic>check</ListItemGraphic>
-                      <ListItemText>Warranty Status: </ListItemText>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemGraphic>build</ListItemGraphic>
-                      <ListItemText className="scroll">Maintenance Provider: GAT Consulting/MN Export</ListItemText>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemGraphic>local_shipping</ListItemGraphic>
-                      <ListItemText className="scroll">Supplier: </ListItemText>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemGraphic>date_range</ListItemGraphic>
-                      <ListItemText>Purchase Date: </ListItemText>
-                    </ListItem>
-                    <ListItem>
-                      <ListItemGraphic>date_range</ListItemGraphic>
-                      <ListItemText>Installation Date: </ListItemText>
-                    </ListItem>
+                    {secondHalf.length > 0 && secondHalf.map((param) => (
+                      <ListItem>
+                        <ListItemGraphic>{param.icon}</ListItemGraphic>
+                        <ListItemText className="scroll">{param.label}</ListItemText>
+                      </ListItem>
+                    ))}
                   </List>
                 </div>
               </div>
               </DialogBody>
-
               :
-
               <DialogBody>
                 <div className = "modalImage">
                   <div>
                     <h3>Equipment Image</h3>
-                    <img src="http://via.placeholder.com/480x270" alt="equipment snapshot"/>
+                    <img style={{width: '100%'}} src="http://via.placeholder.com/480x270" alt="equipment snapshot"/>
                   </div>
                   <div>
                     <h3> QR Code </h3>
-                    <QRCode
+                    <QRCode 
                       value={"1"}
                       size={270}
                       bgColor={"#F2F1EF"}
