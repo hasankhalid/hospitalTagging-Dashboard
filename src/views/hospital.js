@@ -284,7 +284,7 @@ class HospitalView extends Component {
                   </div>
                   <div>
                     <h3> QR Code </h3>
-                    <QRCode 
+                    <QRCode
                       value={"1"}
                       size={270}
                       bgColor={"#F2F1EF"}
