@@ -78,12 +78,35 @@ class HospitalView extends Component {
         serial: '1234',
         name: 'Equipment',
         model: '2002',
-        make: 'Make'},
+        make: 'Make',
+        yearman: '2016',
+        dep: 'gynae',
+        hospital: 'ABC',
+        func: 'Yes',
+        main: 'Yes',
+        warranty: 'No',
+        maint: 'GAT Consulting',
+        supplier: 'MN Exports',
+        purdate: '01/01/2017',
+        instdate: '01/05/2017',
+        comment: 'Hi, I am a comment'},
       {
-        serial: 'biomedical',
-        name: 'Equipment',
-        model: '2002',
-        make: 'Make'}],
+        serial: '232424',
+        name: 'Equip2323',
+        model: '2212',
+        make: 'Make',
+        yearman: '2016',
+        dep: 'gynae',
+        hospital: 'ABC',
+        func: 'Yes',
+        main: 'Yes',
+        warranty: 'No',
+        maint: 'GAT Consulting',
+        supplier: 'MN Exports',
+        purdate: '01/01/2017',
+        instdate: '01/05/2017',
+        comment: 'Hi, I am a comment'}],
+
     departments: [
     {   label: 'Emergency',
         value: '1' },{
@@ -131,35 +154,54 @@ class HospitalView extends Component {
 
   params: [
   {   label: 'Name: ',
-      icon: 'text_fields' },{
+      icon: 'text_fields',
+      accesor: 'name'},{
       label: 'Serial No: ',
-      icon: 'credit_card'},{
+      icon: 'credit_card',
+      accesor: 'serial'},{
       label: 'Model: ',
-      icon: 'filter_2' },{
+      icon: 'filter_2',
+      accesor: 'model'},{
       label: 'Make/Origin: ',
-      icon: 'event'},{
+      icon: 'event',
+      accesor: 'make'},{
       label: 'Year of Manufacture: ',
-      icon: 'date_range'},{
+      icon: 'date_range',
+      accesor: 'yearman'},{
       label: 'Department: ',
-      icon: 'business' },{
+      icon: 'business',
+      accesor: 'dep'},{
       label: 'Hospital/Facility: ',
-      icon: 'location_city'},{
+      icon: 'location_city',
+      accesor: 'hospital'},{
       label: 'Functional Status: ',
-      icon: 'warning'},{
+      icon: 'warning',
+      accesor: 'func'},{
       label: 'Maintenance Status: ',
-      icon: 'check' },{
+      icon: 'check',
+      accesor: 'main'},{
       label: 'Warranty Status: ',
-      icon: 'check'},{
+      icon: 'check',
+      accesor: 'warranty'},{
       label: 'Maintenance Provider: ',
-      icon: 'build'},{
+      icon: 'build',
+      accesor: 'maint'},{
       label: 'Supplier: ',
-      icon: 'local_shipping' },{
+      icon: 'local_shipping',
+      accesor: 'supplier'},{
       label: 'Purchase Date: ',
-      icon: 'date_range'},{
+      icon: 'date_range',
+      accesor: 'purdate'},{
       label: 'Installation Date: ',
-      icon: 'date_range'}
+      icon: 'date_range',
+      accesor: 'instdate'}
   ],
 
+    currValues: {
+
+    },
+
+    currDepartment: '',
     value: '1',
     tempOpen: false
   }
@@ -173,17 +215,34 @@ class HospitalView extends Component {
     this.setState({
       tempOpen: false,
     });
-    console.log(name)
+    this.setState({
+      currDepartment: name
+    })
+    console.log(this.state.currDepartment)
+  }
+
+  setCurrValues = (row) => {
+    this.setState({
+      currValues: row.original
+    })
+  }
+
+  returnLabelValue = (label) => {
+    return this.state.currValues[label]
   }
 
   render () {
+    console.log(this.state.activeTabIndex)
     const changeMe = this.state.params;
     const firstHalf = this.sliceArray(changeMe,0);
     const secondHalf = this.sliceArray(changeMe,1);
     return (
       <Grid>
         <GridCell span = "12">
+          <h1 className="title">{this.props.location.state.hospital}</h1>
           <h2 className="title">All Hospital Equipment by {this.state.title}</h2>
+          <h2 className="title">{this.state.currDepartment}</h2>
+
           {this.state.title === "Category" ?
           <TabBarScroller>
           <TabBar
@@ -191,9 +250,9 @@ class HospitalView extends Component {
             onChange={evt => this.setState({'activeTabIndex': evt.target.value})}
             >
               <Tab><TabIcon>local_hospital</TabIcon><TabIconText> Biomedical Equipment</TabIconText></Tab>
-              <Tab><TabIcon>computer</TabIcon><TabIconText> Electrical Equipment</TabIconText></Tab>
               <Tab><TabIcon>local_hotel</TabIcon><TabIconText> Hospital Equipment</TabIconText></Tab>
-              <Tab><TabIcon>build</TabIcon><TabIconText> AC/Generator</TabIconText></Tab>
+              <Tab><TabIcon>ac_unit</TabIcon><TabIconText> Air Conditioner</TabIconText></Tab>
+              <Tab><TabIcon>build</TabIcon><TabIconText> Generator</TabIconText></Tab>
           </TabBar>
           </TabBarScroller>
           :
@@ -236,6 +295,7 @@ class HospitalView extends Component {
             getTdProps={(state, rowInfo, column, instance) => {
             return {
               onClick: (e) => {
+                this.setCurrValues(rowInfo)
                 this.setState({standardDialogOpen: true})
               }}}}
           />
@@ -256,9 +316,9 @@ class HospitalView extends Component {
                   <div className = "list">
                     <List nonInteractive>
                     {firstHalf.length > 0 && firstHalf.map((param) => (
-                      <ListItem>
+                      <ListItem key={param.label}>
                         <ListItemGraphic>{param.icon}</ListItemGraphic>
-                        <ListItemText className="scroll">{param.label}</ListItemText>
+                        <ListItemText className="scroll">{param.label + this.returnLabelValue(param.accesor)}</ListItemText>
                       </ListItem>
                     ))}
                     </List>
@@ -266,9 +326,9 @@ class HospitalView extends Component {
                   <div className = "list">
                     <List nonInteractive>
                     {secondHalf.length > 0 && secondHalf.map((param) => (
-                      <ListItem>
+                      <ListItem key={param.label}>
                         <ListItemGraphic>{param.icon}</ListItemGraphic>
-                        <ListItemText className="scroll">{param.label}</ListItemText>
+                        <ListItemText className="scroll">{param.label + this.returnLabelValue(param.accesor)}</ListItemText>
                       </ListItem>
                     ))}
                   </List>

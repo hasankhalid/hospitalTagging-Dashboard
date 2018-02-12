@@ -19,6 +19,7 @@ class HospitalList extends Component {
   hospitals = [
     {
       name: 'Hospital1',
+      id: '1',
       visited: true,
       equipmentCount: 2,
       wardeqCount: 3,
@@ -26,6 +27,7 @@ class HospitalList extends Component {
     },
     {
       name: 'Hospital2',
+      id: '2',
       visited: false,
       equipmentCount: 4,
       wardeqCount: 6,
@@ -33,6 +35,7 @@ class HospitalList extends Component {
     },
     {
       name: 'Hospital3',
+      id: '3',
       visited: true,
       equipmentCount: 2,
       wardeqCount: 5,
@@ -40,6 +43,7 @@ class HospitalList extends Component {
     },
     {
       name: 'Hospital4',
+      id: '4',
       visited: false,
       equipmentCount: 5,
       wardeqCount: 1,
@@ -47,6 +51,7 @@ class HospitalList extends Component {
     },
     {
       name: 'Hospital5',
+      id: '5',
       visited: true,
       equipmentCount: 2,
       wardeqCount: 2,
@@ -54,6 +59,7 @@ class HospitalList extends Component {
     },
     {
       name: 'Hospital6',
+      id: '6',
       visited: false,
       equipmentCount: 12,
       wardeqCount: 8,
@@ -88,10 +94,10 @@ class HospitalList extends Component {
                   </span>
                   </CardSupportingText>
                   <CardActions>
-                    <Link to={{ pathname: '/hospital', state: { hospital: hospital.name} }} className="cardButton">
+                    <Link to={{ pathname: '/hospital', state: { hospital: hospital.name, id: hospital.id} }} className="cardButton">
                       <CardAction unelevated>View All</CardAction>
                     </Link>
-                    <Link className="cardButton" to={{ pathname: '/byDepartment', state: { hospital: hospital.name} }} >
+                    <Link className="cardButton" to={{ pathname: '/byDepartment', state: { hospital: hospital.name, id: hospital.id} }} >
                       <CardAction unelevated >Browse by Department</CardAction>
                     </Link>
                   </CardActions>
