@@ -15,12 +15,28 @@ import { List, ListItem, ListItemText, ListItemGraphic } from 'rmwc/List';
 import { Drawer, DrawerHeader, DrawerContent } from 'rmwc/Drawer';
 
 import QRCode from 'qrcode.react';
+import axios from 'axios'
 
 class HospitalView extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0)
-  }
+    this.props.location.pathname === '/hospital' ?
+      axios.post(`https://gat-gt.herokuapp.com/api/eqbytype`,{
+        id: 0,
+        type: 0
+      })
+        .then(response => this.setState({
+          params: response.data.params,
+          columns: response.data.columns,
+          rows: response.data.rows,
+          loading: false
+        }))
+      :
+      axios.get(`https://gat-gt.herokuapp.com/api/departments`).then(response => this.setState({
+        departments: response.data.data
+      }))
+    }
 
   componentWillMount() {
     this.setTitle();
@@ -45,161 +61,22 @@ class HospitalView extends Component {
 
   state = {
     activeTabIndex: 0,
+    data: '',
 
-    columns: [{
-      Header: 'Serial-No',
-      accessor: 'serial',
-    }, {
-      Header: 'Name',
-      accessor: 'name',
-    }, {
-      Header: 'Model',
-      accessor: 'model',
-      Cell: props => <span className='number'>{props.value}</span>,
-    }, {
-      Header: 'Make/Origin',
-      accessor: 'make',
-    }, {
-      Header: 'Date of Manufacture',
-      accessor: 'manufacturedate',
-    }, {
-      Header: 'Purchase Date',
-      accessor: 'purchasedate',
-    }, {
-      Header: 'Functional Status',
-      accessor: 'funcstatus',
-    }],
+    columns: [],
 
     tabs: [],
     standardDialogOpen: false,
     viewDetail: false,
 
-    rows: [{
-        serial: '1234',
-        name: 'Equipment',
-        model: '2002',
-        make: 'Make',
-        yearman: '2016',
-        dep: 'gynae',
-        hospital: 'ABC',
-        func: 'Yes',
-        main: 'Yes',
-        warranty: 'No',
-        maint: 'GAT Consulting',
-        supplier: 'MN Exports',
-        purdate: '01/01/2017',
-        instdate: '01/05/2017',
-        comment: 'Hi, I am a comment'},
-      {
-        serial: '232424',
-        name: 'Equip2323',
-        model: '2212',
-        make: 'Make',
-        yearman: '2016',
-        dep: 'gynae',
-        hospital: 'ABC',
-        func: 'Yes',
-        main: 'Yes',
-        warranty: 'No',
-        maint: 'GAT Consulting',
-        supplier: 'MN Exports',
-        purdate: '01/01/2017',
-        instdate: '01/05/2017',
-        comment: 'Hi, I am a comment'}],
+    rows: [],
+    loading: true,
 
-    departments: [
-    {   label: 'Emergency',
-        value: '1' },{
-        label: 'Medical',
-        value: '2'},{
-        label: 'Surgery',
-        value: '3' },{
-        label: 'TB & Chest',
-        value: '4'},{
-        label: 'Eye',
-        value: '5'},{
-        label: 'ICU',
-        value: '6' },{
-        label: 'Dental',
-        value: '7'},{
-        label: 'Dialysis',
-        value: '8'},{
-        label: 'NNN',
-        value: '9' },{
-        label: 'PCR/Main Lab',
-        value: '10'},{
-        label: 'Gynae',
-        value: '11'},{
-        label: 'Dermatology',
-        value: '12' },{
-        label: 'Gastroscopy',
-        value: '13'},{
-        label: 'Radiology',
-        value: '14'},{
-        label: 'Physiotherapy',
-        value: '15' },{
-        label: 'Blood Bank',
-        value: '16'},{
-        label: 'Orthopaedic',
-        value: '17'},{
-        label: 'ENT',
-        value: '18' },{
-        label: 'PAEDS',
-        value: '19'},{
-        label: 'Special Treatment',
-        value: '20'},{
-        label: 'Psychiatry',
-        value: '21' }
-  ],
+    departments: [],
 
-  params: [
-  {   label: 'Name: ',
-      icon: 'text_fields',
-      accesor: 'name'},{
-      label: 'Serial No: ',
-      icon: 'credit_card',
-      accesor: 'serial'},{
-      label: 'Model: ',
-      icon: 'filter_2',
-      accesor: 'model'},{
-      label: 'Make/Origin: ',
-      icon: 'event',
-      accesor: 'make'},{
-      label: 'Year of Manufacture: ',
-      icon: 'date_range',
-      accesor: 'yearman'},{
-      label: 'Department: ',
-      icon: 'business',
-      accesor: 'dep'},{
-      label: 'Hospital/Facility: ',
-      icon: 'location_city',
-      accesor: 'hospital'},{
-      label: 'Functional Status: ',
-      icon: 'warning',
-      accesor: 'func'},{
-      label: 'Maintenance Status: ',
-      icon: 'check',
-      accesor: 'main'},{
-      label: 'Warranty Status: ',
-      icon: 'check',
-      accesor: 'warranty'},{
-      label: 'Maintenance Provider: ',
-      icon: 'build',
-      accesor: 'maint'},{
-      label: 'Supplier: ',
-      icon: 'local_shipping',
-      accesor: 'supplier'},{
-      label: 'Purchase Date: ',
-      icon: 'date_range',
-      accesor: 'purdate'},{
-      label: 'Installation Date: ',
-      icon: 'date_range',
-      accesor: 'instdate'}
-  ],
+    params: [],
 
-    currValues: {
-
-    },
+    currValues: {},
 
     currDepartment: '',
     value: '1',
@@ -218,6 +95,15 @@ class HospitalView extends Component {
     this.setState({
       currDepartment: name
     })
+    axios.post(`https://gat-gt.herokuapp.com/api/eqbydepartment`,{
+      id: 0,
+      department:0
+    }).then(response => this.setState({
+      params: response.data.params,
+      columns: response.data.columns,
+      rows: response.data.rows,
+      loading: false
+    }))
     console.log(this.state.currDepartment)
   }
 
@@ -232,6 +118,7 @@ class HospitalView extends Component {
   }
 
   render () {
+    console.log(this.state.data.params)
     console.log(this.state.activeTabIndex)
     const changeMe = this.state.params;
     const firstHalf = this.sliceArray(changeMe,0);
@@ -289,6 +176,7 @@ class HospitalView extends Component {
           className="highlight"
             data={this.state.rows}
             columns={this.state.columns}
+            loading={this.state.loading}
             defaultPageSize={100}
             pageSizeOptions={[20, 50, 100, 200, 300]}
             filterable={true}

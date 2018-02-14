@@ -13,8 +13,18 @@ import {
 } from 'rmwc/Card';
 import { Elevation } from 'rmwc/Elevation';
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 class HospitalList extends Component {
+  componentDidMount(){
+    axios.get(`https://gat-gt.herokuapp.com/api/hospitals`)
+        .then(response => this.setState({
+          hospitals: response.data.data
+        }))
+   }
+   state = {
+     hospitals: []
+   }
 
   hospitals = [
     {
@@ -73,7 +83,7 @@ class HospitalList extends Component {
         <GridCell span="12">
           <h2>Hospital List</h2>
         </GridCell>
-          {this.hospitals.length > 0 && this.hospitals.map((hospital) => (
+          {this.state.hospitals.length > 0 && this.state.hospitals.map((hospital) => (
             <GridCell span="4" key={hospital.name}>
               <Elevation z={3}>
                 <Card>
@@ -89,7 +99,8 @@ class HospitalList extends Component {
                       Equipment Tagged: <br/>
                     </strong>
                       Biomedical Equipment: {hospital.equipmentCount}<br/>
-                      Electrical Equipment: {hospital.electriEqCount}<br/>
+                      Air Conditioners: {hospital.acCount}<br/>
+                      Generator Conditioners: {hospital.genCount}<br/>
                       Hospital Equipment: {hospital.wardeqCount}
                   </span>
                   </CardSupportingText>

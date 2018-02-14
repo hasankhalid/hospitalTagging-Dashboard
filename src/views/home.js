@@ -7,6 +7,7 @@ import StackedBarChart from '../components/warrantybar'
 import MaintenanceChart from '../components/maintenancebar'
 
 class Home extends Component {
+
   render () {
     return (
       <div>
