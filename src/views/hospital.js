@@ -62,6 +62,7 @@ class HospitalView extends Component {
   state = {
     activeTabIndex: 0,
     data: '',
+    emptyDialogOpen: false,
 
     columns: [],
 
@@ -108,8 +109,14 @@ class HospitalView extends Component {
   }
 
   setCurrValues = (row) => {
+    row === undefined ?
     this.setState({
-      currValues: row.original
+      emptyDialogOpen: true
+    })
+    :
+    this.setState({
+      currValues: row.original,
+      standardDialogOpen: true
     })
   }
 
@@ -184,10 +191,24 @@ class HospitalView extends Component {
             return {
               onClick: (e) => {
                 this.setCurrValues(rowInfo)
-                this.setState({standardDialogOpen: true})
               }}}}
           />
           </Elevation>
+          <Dialog
+            open={this.state.emptyDialogOpen}
+            onClose={evt => this.setState({emptyDialogOpen: false})}
+          >
+            <DialogSurface>
+              <DialogHeader>
+                <DialogHeaderTitle>Bad News</DialogHeaderTitle>
+              </DialogHeader>
+              <DialogBody>This is a dead end. This row is empty. Please go back and select a valid row</DialogBody>
+              <DialogFooter>
+                  <DialogFooterButton accept>Close</DialogFooterButton>
+              </DialogFooter>
+            </DialogSurface>
+            <DialogBackdrop />
+          </Dialog>
           <Dialog
             open={this.state.standardDialogOpen}
             onClose={evt => this.setState({standardDialogOpen: false})}
