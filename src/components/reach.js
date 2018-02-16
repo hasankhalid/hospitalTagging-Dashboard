@@ -28,11 +28,11 @@ class Reach extends Component {
     return (
       <Grid>
         <GridCell span="12">
-          <h2>Hospitals Reached</h2>
+          <h2 style={{color: '#303F9F'}}>Hospitals Reached</h2>
           <LinearProgress progress={this.state.reach}></LinearProgress>
         </GridCell>
         <GridCell span="12">
-          <Button onClick={(e) => this.Scroll()} unelevated>View Hospitals</Button>
+          <Button style={{backgroundColor: '#FF3F80'}} onClick={(e) => this.Scroll()} unelevated>View Hospitals</Button>
         </GridCell>
       </Grid>
     )

@@ -26,62 +26,11 @@ class HospitalList extends Component {
      hospitals: []
    }
 
-  hospitals = [
-    {
-      name: 'Hospital1',
-      id: '1',
-      visited: true,
-      equipmentCount: 2,
-      wardeqCount: 3,
-      electriEqCount: 5
-    },
-    {
-      name: 'Hospital2',
-      id: '2',
-      visited: false,
-      equipmentCount: 4,
-      wardeqCount: 6,
-      electriEqCount: 4
-    },
-    {
-      name: 'Hospital3',
-      id: '3',
-      visited: true,
-      equipmentCount: 2,
-      wardeqCount: 5,
-      electriEqCount: 9
-    },
-    {
-      name: 'Hospital4',
-      id: '4',
-      visited: false,
-      equipmentCount: 5,
-      wardeqCount: 1,
-      electriEqCount: 9
-    },
-    {
-      name: 'Hospital5',
-      id: '5',
-      visited: true,
-      equipmentCount: 2,
-      wardeqCount: 2,
-      electriEqCount: 4
-    },
-    {
-      name: 'Hospital6',
-      id: '6',
-      visited: false,
-      equipmentCount: 12,
-      wardeqCount: 8,
-      electriEqCount: 9
-    }
-  ]
-
   render () {
     return (
       <Grid>
         <GridCell span="12">
-          <h2>Hospital List</h2>
+          <h2 style={{color: '#303F9F'}}>Hospital List</h2>
         </GridCell>
           {this.state.hospitals.length > 0 && this.state.hospitals.map((hospital) => (
             <GridCell span="4" key={hospital.name}>
@@ -89,13 +38,13 @@ class HospitalList extends Component {
                 <Card>
                   <CardHorizontalBlock>
                     <CardPrimary>
-                      <CardTitle large> {hospital.name}</CardTitle>
-                      <CardSubtitle>Visited: {hospital.visited ? 'Yes' : 'No'}</CardSubtitle>
+                      <CardTitle large style={{color: '#303F9F'}}><strong>{hospital.name}</strong></CardTitle>
+                      <CardSubtitle style={{color: '#303F9F'}}>Visited: {hospital.visited ? 'Yes' : 'No'}</CardSubtitle>
                     </CardPrimary>
                     <CardMediaItem src="https://i2.wp.com/www.oceanviewumc.com/wp-content/uploads/2016/02/sthescope.jpg?fit=356%2C429"/>
                   </CardHorizontalBlock>
                   <CardSupportingText>
-                    <span><strong>
+                    <span style={{color: '#303F9F'}}><strong>
                       Equipment Tagged: <br/>
                     </strong>
                       Biomedical Equipment: {hospital.equipmentCount}<br/>
@@ -106,10 +55,10 @@ class HospitalList extends Component {
                   </CardSupportingText>
                   <CardActions>
                     <Link to={{ pathname: '/hospital', state: { hospital: hospital.name, id: hospital.id} }} className="cardButton">
-                      <CardAction unelevated>View All</CardAction>
+                      <CardAction unelevated style={{backgroundColor: '#FF3F80'}}>View All</CardAction>
                     </Link>
                     <Link className="cardButton" to={{ pathname: '/byDepartment', state: { hospital: hospital.name, id: hospital.id} }} >
-                      <CardAction unelevated >Browse by Department</CardAction>
+                      <CardAction unelevated style={{backgroundColor: '#3F51B5'}}>Browse by Department</CardAction>
                     </Link>
                   </CardActions>
                 </Card>

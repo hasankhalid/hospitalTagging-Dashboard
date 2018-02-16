@@ -125,17 +125,15 @@ class HospitalView extends Component {
   }
 
   render () {
-    console.log(this.state.data.params)
-    console.log(this.state.activeTabIndex)
     const changeMe = this.state.params;
     const firstHalf = this.sliceArray(changeMe,0);
     const secondHalf = this.sliceArray(changeMe,1);
     return (
       <Grid>
         <GridCell span = "12">
-          <h1 className="title">{this.props.location.state.hospital}</h1>
-          <h2 className="title">All Hospital Equipment by {this.state.title}</h2>
-          <h2 className="title">{this.state.currDepartment}</h2>
+          <h1 className="title" style={{color: '#303F9F'}}>{this.props.location.state.hospital}</h1>
+          <h2 className="title" style={{color: '#303F9F'}}>All Hospital Equipment by {this.state.title}</h2>
+          <h2 className="title" style={{color: '#303F9F'}}>{this.state.currDepartment}</h2>
 
           {this.state.title === "Category" ?
           <TabBarScroller>
@@ -143,10 +141,10 @@ class HospitalView extends Component {
             activeTabIndex={this.state.activeTabIndex}
             onChange={evt => this.setState({'activeTabIndex': evt.target.value})}
             >
-              <Tab><TabIcon>local_hospital</TabIcon><TabIconText> Biomedical Equipment</TabIconText></Tab>
-              <Tab><TabIcon>local_hotel</TabIcon><TabIconText> Hospital Equipment</TabIconText></Tab>
-              <Tab><TabIcon>ac_unit</TabIcon><TabIconText> Air Conditioner</TabIconText></Tab>
-              <Tab><TabIcon>build</TabIcon><TabIconText> Generator</TabIconText></Tab>
+              <Tab style={{color: '#311B92'}}><TabIcon style={{color: '#311B92'}}>local_hospital</TabIcon><TabIconText> Biomedical Equipment</TabIconText></Tab>
+              <Tab style={{color: '#311B92'}}><TabIcon style={{color: '#311B92'}}>local_hotel</TabIcon><TabIconText> Hospital Equipment</TabIconText></Tab>
+              <Tab style={{color: '#311B92'}}><TabIcon style={{color: '#311B92'}}>ac_unit</TabIcon><TabIconText> Air Conditioner</TabIconText></Tab>
+              <Tab style={{color: '#311B92'}}><TabIcon style={{color: '#311B92'}}>build</TabIcon><TabIconText> Generator</TabIconText></Tab>
           </TabBar>
           </TabBarScroller>
           :
@@ -154,6 +152,7 @@ class HospitalView extends Component {
             <Button
               onClick={() => this.setState({tempOpen: !this.state.tempOpen})}
               raised
+              style={{backgroundColor: '#FF3F80'}}
             >
               Select Department
             </Button>
@@ -162,7 +161,7 @@ class HospitalView extends Component {
               open={this.state.tempOpen}
               onClose={() => this.setState({tempOpen: false})}
             >
-              <DrawerHeader>
+              <DrawerHeader style={{backgroundColor: '#3F51B5'}}>
                <ListItemGraphic size={40} style={{color: 'white'}}>business</ListItemGraphic>
                 Department List
               </DrawerHeader>
@@ -230,6 +229,9 @@ class HospitalView extends Component {
                         <ListItemText className="scroll">{param.label + this.returnLabelValue(param.accesor)}</ListItemText>
                       </ListItem>
                     ))}
+                      <ListItem>
+                        <ListItemGraphic>date_range</ListItemGraphic><ListItemText>Last Checkup: </ListItemText>
+                      </ListItem>
                     </List>
                   </div>
                   <div className = "list">
@@ -242,7 +244,7 @@ class HospitalView extends Component {
                     ))}
                   </List>
                 </div>
-              </div>
+                </div>
               </DialogBody>
               :
               <DialogBody>
@@ -254,7 +256,7 @@ class HospitalView extends Component {
                   <div>
                     <h3> QR Code </h3>
                     <QRCode
-                      value={"1"}
+                      value={this.state.currValues.qr === undefined ? 'N/A' : this.state.currValues.qr + ''}
                       size={270}
                       bgColor={"#F2F1EF"}
                       fgColor={"#5B3256"}
@@ -262,7 +264,17 @@ class HospitalView extends Component {
                     />
                   </div>
                 </div>
-                <span className="comments"><strong>Enumerator Comments:</strong> The equipment is functional but requires more maintenance</span><br/>
+                <span className="comments"><strong>Enumerator Comments:</strong> {this.state.currValues.comment}</span><br/>
+                <div className="empInfo">
+                  <div>
+                    <span className="comments"><strong>Employee Status:</strong> {this.state.currValues.empStatus === undefined ? 'N/A' : this.state.currValues.empStatus}</span><br/>
+                    <span className="comments"><strong>Employee Name:</strong> {this.state.currValues.empName === undefined ? 'N/A' : this.state.currValues.empName}</span><br/>
+                  </div>
+                  <div>
+                    <span className="comments"><strong>Employee CNIC:</strong> {this.state.currValues.empID === undefined ? 'N/A' : this.state.currValues.empID}</span><br/>
+                    <span className="comments"><strong>Father Name:</strong> {this.state.currValues.empFather === undefined ? 'N/A' : this.state.currValues.empFather}</span><br/>
+                  </div>
+                </div>
               </DialogBody>
             }
               <DialogFooter>

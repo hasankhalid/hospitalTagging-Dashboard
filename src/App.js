@@ -9,12 +9,14 @@ import Footer from './components/footer'
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <NavBar/>
-        <Route exact path ="/" component={Home}/>
-        <Route exact path ="/hospital" component={HospitalView}/>
-        <Route exact path ="/byDepartment" component={HospitalView}/>
-        <Footer/>
+      <div className ="container">
+        <div className="App">
+          <NavBar/>
+          <Route exact path ="/" component={Home}/>
+          <Route exact path ="/hospital" component={HospitalView}/>
+          <Route exact path ="/byDepartment" component={HospitalView}/>
+        </div>
+      <Footer/>
       </div>
     );
   }

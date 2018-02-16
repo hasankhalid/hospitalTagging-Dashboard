@@ -11,8 +11,8 @@ class Title extends Component {
               <img alt="Government of Punjab Logo" className ="govLogo" src="http://via.placeholder.com/110x110"/>
             </div>
             <div className="textCenter">
-              <h1>Tagging of Biomedical Equipment</h1>
-              <h4>Punjab Employees Social Security Institution | © 2018 </h4>
+              <h1 style={{color: '#303F9F'}}>Tagging of Biomedical Equipment</h1>
+              <h4 style={{color: '#303F9F'}}>Punjab Employees Social Security Institution | © 2018 </h4>
             </div>
           </div>
         </GridCell>

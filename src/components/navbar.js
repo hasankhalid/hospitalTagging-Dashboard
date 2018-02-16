@@ -14,15 +14,15 @@ class NavBar extends Component {
   render () {
     return (
       <div>
-        <Toolbar>
+        <Toolbar style={{backgroundColor: '#3F51B5'}}>
           <ToolbarRow>
             <ToolbarSection alignStart>
                 <Ripple accent>
                   <Link to="/" style={{textDecoration: 'none', color: 'white'}}>
-                    <ToolbarMenuIcon use="dashboard"/>
+                    <ToolbarMenuIcon use="home"/>
                   </Link>
                 </Ripple>
-              <ToolbarTitle>DashBoard</ToolbarTitle>
+              <ToolbarTitle>Dashboard</ToolbarTitle>
             </ToolbarSection>
             <ToolbarSection alignEnd>
               <span className="app__version">0.0.1</span>
