@@ -29,8 +29,8 @@ class StackedBarChart extends Component {
             <CartesianGrid strokeDasharray="3 3"/>
             <Tooltip/>
             <Legend />
-            <Bar isAnimationActive={false} barSize={20} dataKey="Warranty" fill="#3F51B5" />
-            <Bar isAnimationActive={false} barSize={20} dataKey="WithoutWarranty" stackId="a" fill="#EF6C00" />
+            <Bar isAnimationActive={false} barSize={20} dataKey="Warranty" fill="#691A99" />
+            <Bar isAnimationActive={false} barSize={20} dataKey="WithoutWarranty" stackId="a" fill="#68EFAD" />
           </BarChart>
         </ResponsiveContainer>
       </GridCell>

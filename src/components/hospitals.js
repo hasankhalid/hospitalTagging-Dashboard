@@ -41,7 +41,7 @@ class HospitalList extends Component {
                       <CardTitle large style={{color: '#303F9F'}}><strong>{hospital.name}</strong></CardTitle>
                       <CardSubtitle style={{color: '#303F9F'}}>Visited: {hospital.visited ? 'Yes' : 'No'}</CardSubtitle>
                     </CardPrimary>
-                    <CardMediaItem src="https://i2.wp.com/www.oceanviewumc.com/wp-content/uploads/2016/02/sthescope.jpg?fit=356%2C429"/>
+                    <CardMediaItem src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwu6E-KW549vbvUTQ5kI1NxunY0U-viT3JM25Mssj1TBhNaw2T4Q"/>
                   </CardHorizontalBlock>
                   <CardSupportingText>
                     <span style={{color: '#303F9F'}}><strong>

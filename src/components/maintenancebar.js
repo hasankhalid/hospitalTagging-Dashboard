@@ -28,8 +28,8 @@ class MaintenanceChart extends Component {
             <CartesianGrid strokeDasharray="3 3"/>
             <Tooltip/>
             <Legend />
-            <Bar isAnimationActive={false} barSize={30} dataKey="Maintained" stackId="a" fill="#00796B" />
-            <Bar isAnimationActive={false} barSize={30} dataKey="NotMaintained" stackId="a" fill="#CDDC39" />
+            <Bar isAnimationActive={false} barSize={30} dataKey="Maintained" stackId="a" fill="#673AB7" />
+            <Bar isAnimationActive={false} barSize={30} dataKey="NotMaintained" stackId="a" fill="#FF4081" />
           </BarChart>
         </ResponsiveContainer>
       </GridCell>

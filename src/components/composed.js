@@ -30,9 +30,9 @@ class StatusComposedChart extends Component {
             <Tooltip/>
             <Legend/>
             <CartesianGrid stroke='#f5f5f5'/>
-            <Area isAnimationActive={false} type='monotone' dataKey='NonFunctional' fill='#F44336' stroke='#8884d8'/>
-            <Bar  isAnimationActive={false} dataKey='Recorded' barSize={20} fill='#303F9F'/>
-            <Line isAnimationActive={false} type='monotone' dataKey='Functional' stroke='#8BC34A'/>
+            <Area isAnimationActive={false} type='monotone' dataKey='NonFunctional' fill='#FF4081' stroke='#8884d8'/>
+            <Bar  isAnimationActive={false} dataKey='Recorded' barSize={20} fill='#455A64'/>
+            <Line isAnimationActive={false} type='monotone' dataKey='Functional' stroke='#3F51B5'/>
          </ComposedChart>
          </ResponsiveContainer>
       </GridCell>
