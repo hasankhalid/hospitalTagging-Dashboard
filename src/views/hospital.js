@@ -23,7 +23,7 @@ class HospitalView extends Component {
     window.scrollTo(0, 0)
     this.props.location.pathname === '/hospital' ?
       axios.post(`https://gat-gt.herokuapp.com/api/eqbytype`,{
-        id: 0,
+        id: this.props.location.state.id,
         type: 0
       })
         .then(response => this.setState({
@@ -31,7 +31,8 @@ class HospitalView extends Component {
           columns: response.data.columns,
           rows: response.data.rows,
           loading: false
-        }))
+        })
+      )
       :
       axios.get(`https://gat-gt.herokuapp.com/api/departments`).then(response => this.setState({
         departments: response.data.data
@@ -89,13 +90,14 @@ class HospitalView extends Component {
     this.setState({viewDetail: reverse})
   }
 
-  handleDrawerClick = (name) => {
+  handleDrawerClick = (name, value) => {
     this.setState({
       tempOpen: false,
     });
     this.setState({
       currDepartment: name
     })
+    console.log(value);
     axios.post(`https://gat-gt.herokuapp.com/api/eqbydepartment`,{
       id: 0,
       department:0
@@ -124,6 +126,23 @@ class HospitalView extends Component {
     return this.state.currValues[label]
   }
 
+  updateValues = (typeID) => {
+      this.setState({
+        loading: true
+      })
+      axios.post(`https://gat-gt.herokuapp.com/api/eqbytype`,{
+        id: this.props.location.state.id,
+        type: typeID
+      })
+        .then(response => this.setState({
+          params: response.data.params,
+          columns: response.data.columns,
+          rows: response.data.rows,
+          loading: false
+        })
+      )
+  }
+
   render () {
     const changeMe = this.state.params;
     const firstHalf = this.sliceArray(changeMe,0);
@@ -141,10 +160,10 @@ class HospitalView extends Component {
             activeTabIndex={this.state.activeTabIndex}
             onChange={evt => this.setState({'activeTabIndex': evt.target.value})}
             >
-              <Tab style={{color: '#311B92'}}><TabIcon style={{color: '#311B92'}}>local_hospital</TabIcon><TabIconText> Biomedical Equipment</TabIconText></Tab>
-              <Tab style={{color: '#311B92'}}><TabIcon style={{color: '#311B92'}}>local_hotel</TabIcon><TabIconText> Hospital Equipment</TabIconText></Tab>
-              <Tab style={{color: '#311B92'}}><TabIcon style={{color: '#311B92'}}>ac_unit</TabIcon><TabIconText> Air Conditioner</TabIconText></Tab>
-              <Tab style={{color: '#311B92'}}><TabIcon style={{color: '#311B92'}}>build</TabIcon><TabIconText> Generator</TabIconText></Tab>
+              <Tab onClick={() => this.updateValues(0)} style={{color: '#311B92'}}><TabIcon style={{color: '#311B92'}}>local_hospital</TabIcon><TabIconText> Biomedical Equipment</TabIconText></Tab>
+              <Tab onClick={() => this.updateValues(1)} style={{color: '#311B92'}}><TabIcon style={{color: '#311B92'}}>local_hotel</TabIcon><TabIconText> Hospital Equipment</TabIconText></Tab>
+              <Tab onClick={() => this.updateValues(2)} style={{color: '#311B92'}}><TabIcon style={{color: '#311B92'}}>ac_unit</TabIcon><TabIconText> Air Conditioner</TabIconText></Tab>
+              <Tab onClick={() => this.updateValues(3)} style={{color: '#311B92'}}><TabIcon style={{color: '#311B92'}}>build</TabIcon><TabIconText> Generator</TabIconText></Tab>
           </TabBar>
           </TabBarScroller>
           :
@@ -167,7 +186,7 @@ class HospitalView extends Component {
               </DrawerHeader>
               <DrawerContent>
               {this.state.departments.length > 0 && this.state.departments.map((department) => (
-                <ListItem onClick={(e) => this.handleDrawerClick(department.label)} key={department.value}>
+                <ListItem onClick={(e) => this.handleDrawerClick(department.label, department.value)} key={department.value}>
                   <ListItemText>{department.label}</ListItemText>
                 </ListItem>
               ))}
@@ -251,7 +270,9 @@ class HospitalView extends Component {
                 <div className = "modalImage">
                   <div>
                     <h3>Equipment Image</h3>
-                    <img style={{width: '100%'}} src="http://via.placeholder.com/480x270" alt="equipment snapshot"/>
+                    <div style={{height: '280px'}}>
+                      <img style={{maxWidth: '100%', maxHeight: '100%'}} src="http://via.placeholder.com/480x270" alt="equipment snapshot"/>
+                    </div>
                   </div>
                   <div>
                     <h3> QR Code </h3>

@@ -14,7 +14,6 @@ class Home extends Component {
         <Title/>
         <Reach/>
         <ComposedChart/>
-        <StackedBarChart/>
         <MaintenanceChart/>
         <HospitalList/>
       </div>

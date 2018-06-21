@@ -8,7 +8,7 @@ class Title extends Component {
         <GridCell span="12">
           <div className="titleWrapper">
             <div className="imageCenter">
-              <img alt="Government of Punjab Logo" className ="govLogo" src="http://via.placeholder.com/110x110"/>
+              <img alt="Government of Punjab Logo" className ="govLogo" src="http://xpertnetworks.net/wp-content/uploads/2015/05/PESSI-Logo-260x300.jpg"/>
             </div>
             <div className="textCenter">
               <h1 style={{color: '#303F9F'}}>Tagging of Biomedical Equipment</h1>

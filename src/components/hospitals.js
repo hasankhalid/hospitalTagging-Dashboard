@@ -57,7 +57,7 @@ class HospitalList extends Component {
                     <Link to={{ pathname: '/hospital', state: { hospital: hospital.name, id: hospital.id} }} className="cardButton">
                       <CardAction unelevated style={{backgroundColor: '#FF3F80'}}>View All</CardAction>
                     </Link>
-                    <Link className="cardButton" to={{ pathname: '/byDepartment', state: { hospital: hospital.name, id: hospital.id} }} >
+                    <Link className="cardButton" style={{display: 'none'}} to={{ pathname: '/byDepartment', state: { hospital: hospital.name, id: hospital.id} }} >
                       <CardAction unelevated style={{backgroundColor: '#3F51B5'}}>Browse by Department</CardAction>
                     </Link>
                   </CardActions>

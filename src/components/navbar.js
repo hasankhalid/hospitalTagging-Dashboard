@@ -27,7 +27,9 @@ class NavBar extends Component {
             <ToolbarSection alignEnd>
               <span className="app__version">0.0.1</span>
               <Ripple accent>
-                <ToolbarMenuIcon use="save"/>
+                <Link to="export" style={{textDecoration: 'none', color: 'white'}}>
+                  <ToolbarMenuIcon use="save"/>
+                </Link>
               </Ripple>
             </ToolbarSection>
           </ToolbarRow>
