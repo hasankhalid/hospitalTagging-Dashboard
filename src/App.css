@@ -63,8 +63,8 @@
   display: flex;
 }
 .footer {
-  background-color: #3F51B5;
-  color: white;
+  background-color: #455A64;
+  color: #eee;
   min-height: 10vh;
 }
 
@@ -132,4 +132,18 @@
 canvas {
     height: auto !important;
     width: 100% !important;
+}
+
+.advance {
+  width: 35px;
+  height: 35px;
+}
+
+.advanceMain {
+  width: 60px;
+  height: 60px;
+}
+
+.loginadvance {
+  margin-top: 15px;
 }

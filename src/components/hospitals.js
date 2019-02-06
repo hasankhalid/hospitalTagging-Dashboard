@@ -27,6 +27,7 @@ class HospitalList extends Component {
    }
 
   render () {
+    console.log(this.state.hospitals);
     return (
       <Grid>
         <GridCell span="12">
@@ -35,16 +36,16 @@ class HospitalList extends Component {
           {this.state.hospitals.length > 0 && this.state.hospitals.map((hospital) => (
             <GridCell span="4" key={hospital.name}>
               <Elevation z={3}>
-                <Card>
+                <Card style={{backgroundColor: '#757575'}}>
                   <CardHorizontalBlock>
                     <CardPrimary>
-                      <CardTitle large style={{color: '#303F9F'}}><strong>{hospital.name}</strong></CardTitle>
-                      <CardSubtitle style={{color: '#303F9F'}}>Visited: {hospital.visited ? 'Yes' : 'No'}</CardSubtitle>
+                      <CardTitle large style={{color: '#fff'}}><strong>{hospital.name}</strong></CardTitle>
+                      <CardSubtitle style={{color: '#fff'}}>Visited: {hospital.visited ? 'Yes' : 'No'}</CardSubtitle>
                     </CardPrimary>
-                    <CardMediaItem src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwu6E-KW549vbvUTQ5kI1NxunY0U-viT3JM25Mssj1TBhNaw2T4Q"/>
+                    <CardMediaItem src="https://futurehealthbiobank.com/ae-en/wp-content/uploads/sites/50/2016/03/stethoscope-icon.png"/>
                   </CardHorizontalBlock>
                   <CardSupportingText>
-                    <span style={{color: '#303F9F'}}><strong>
+                    <span style={{color: '#fff'}}><strong>
                       Equipment Tagged: <br/>
                     </strong>
                       Biomedical Equipment: {hospital.equipmentCount}<br/>
@@ -54,9 +55,13 @@ class HospitalList extends Component {
                   </span>
                   </CardSupportingText>
                   <CardActions>
-                    <Link to={{ pathname: '/hospital', state: { hospital: hospital.name, id: hospital.id} }} className="cardButton">
-                      <CardAction unelevated style={{backgroundColor: '#FF3F80'}}>View All</CardAction>
+                    {hospital.visited ?
+                    <Link to={{ pathname: '/hospital', state: {hospital: hospital.name, id: hospital.hospitalId, serial: hospital.serial, enumId: hospital.enumId}}} className="cardButton">
+                        <CardAction elevated="true" style={{backgroundColor: 'white', color: '#9C27B0'}}>View All</CardAction>
                     </Link>
+                        :
+                        <CardAction elevated="true" style={{backgroundColor: 'white', color: '#9C27B0'}}>View All</CardAction>
+                    }
                     <Link className="cardButton" style={{display: 'none'}} to={{ pathname: '/byDepartment', state: { hospital: hospital.name, id: hospital.id} }} >
                       <CardAction unelevated style={{backgroundColor: '#3F51B5'}}>Browse by Department</CardAction>
                     </Link>

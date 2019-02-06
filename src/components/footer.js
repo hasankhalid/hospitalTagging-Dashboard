@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, GridCell } from 'rmwc/Grid';
-
+import logo from './advance.png';
 
 class Footer extends Component {
   render () {
@@ -8,7 +8,8 @@ class Footer extends Component {
       <footer  className="footer">
         <Grid>
           <GridCell span="12" style={{display: 'flex', justifyContent: 'space-between'}}>
-            <span style={{alignSelf: 'center'}}>Developed by Advance Systems. © 2018</span>
+            <img src={logo} className="advance"/>
+            <span style={{alignSelf: 'center'}}>Advance Systems © 2018</span>
           </GridCell>
         </Grid>
       </footer>

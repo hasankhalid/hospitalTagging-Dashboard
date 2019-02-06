@@ -7,6 +7,7 @@ import {
   ToolbarMenuIcon,
 } from 'rmwc/Toolbar';
 import {Link} from 'react-router-dom'
+import { Button, ButtonIcon } from 'rmwc/Button';
 
 import { Ripple } from 'rmwc/Ripple';
 
@@ -14,23 +15,24 @@ class NavBar extends Component {
   render () {
     return (
       <div>
-        <Toolbar style={{backgroundColor: '#3F51B5'}}>
+        <Toolbar style={{backgroundColor: '#455A64', color: '#EEEEEE'}}>
           <ToolbarRow>
             <ToolbarSection alignStart>
                 <Ripple accent>
-                  <Link to="/" style={{textDecoration: 'none', color: 'white'}}>
+                  <Link to="/home" style={{textDecoration: 'none', color: '#eee'}}>
                     <ToolbarMenuIcon use="home"/>
                   </Link>
                 </Ripple>
               <ToolbarTitle>Dashboard</ToolbarTitle>
             </ToolbarSection>
             <ToolbarSection alignEnd>
-              <span className="app__version">0.0.1</span>
-              <Ripple accent>
-                <Link to="export" style={{textDecoration: 'none', color: 'white'}}>
-                  <ToolbarMenuIcon use="save"/>
+              {this.props.logout === "logout" ?
+                <Link to='/'>
+                  <Button onClick={() => localStorage.removeItem('token')} style={{marginRight: '10px', backgroundColor: '#E53935'}} raised>Logout</Button>
                 </Link>
-              </Ripple>
+                :
+                <span></span>
+              }
             </ToolbarSection>
           </ToolbarRow>
         </Toolbar>
