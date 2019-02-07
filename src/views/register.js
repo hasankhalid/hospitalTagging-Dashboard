@@ -11,36 +11,42 @@ import {Redirect} from 'react-router'
 import logo from '../components/advance.png';
 
 
-class Login extends Component {
+class Register extends Component {
    state = {
      username: '',
      password: '',
+     level: '',
      toHome: false,
      loginError: false,
-     loading: false
+     loading: false,
+     userCreated: false
    }
 
-   submitLogin = () => {
+   submitUsername = () => {
      this.setState({
        loading: true,
        loginError: false
      })
-     axios.post(`https://gat-gt.herokuapp.com/api/login`,{
+
+     axios.post(`https://gat-gt.herokuapp.com/api/register`,{
+       name : this.state.username,
        username : this.state.username,
-       password : this.state.password
+       password : this.state.password,
+       level : this.state.level,
+       cnic : '123'
      }).then((response) => {
-       if (!response.data.token) {
+       if (response.status === 200) {
          this.setState({
-           toHome: false,
+           loading: false,
+           userCreated: true,
+           loginError: false,
          })
        }
        else {
-         window.localStorage.token = response.data.token;
-         window.level = JSON.parse(window.atob(window.localStorage.token.split('.')[1])).level;
-
          this.setState({
-           toHome: true,
-           loading: false
+           loading: false,
+           loginError: true,
+           userCreated: false
          })
        }
      })
@@ -48,36 +54,26 @@ class Login extends Component {
        this.setState({
          loginError: true,
          loading: false,
+         userCreated: false
        })
      });
    }
 
-
-
-
   render () {
-    if(window.localStorage.token) {
-      this.setState({
-        toHome: true
-      })
-    }
-
-    if (this.state.toHome === true) {
-      return <Redirect to='/home' />
-    }
     return (
       <div>
-        <NavBar/>
+        <NavBar register="noregister" logout="logout"/>
         <Title/>
         <Grid>
           <GridCell span="12" style={{display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '50px'}}>
             <Elevation z={3} style={{width: '250px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingBottom: '15px'}}>
               <img src={logo} className="advanceMain loginadvance"/>
               {}
-              <TextField required onChange={evt => this.setState({'username': evt.target.value})} label="Email."  style={{width: '230px'}}/>
+              <TextField required onChange={evt => this.setState({'username': evt.target.value})} label="Username."  style={{width: '230px'}}/>
               <TextField required onChange={evt => this.setState({'password': evt.target.value})} type="password" label="Password." style={{width: '230px'}}/>
-              {this.state.loginError === false ? this.state.loading === false ? <p style={{fontSize: '12px'}}> </p> : <p style={{fontSize: '12px', color: 'blue'}}>Loading</p> : <p style={{fontSize: '14px', color: 'red'}}>Incorrect Email or Password</p>}
-              <Button onClick={() => this.submitLogin()} style={{alignSelf: 'flex-start', marginLeft: '10px', marginTop: '5px'}} raised>Sign In</Button>
+              <TextField required onChange={evt => this.setState({'level': evt.target.value})} label="Level." type="number" min="0" max="2"  style={{width: '230px'}}/>
+              {this.state.loginError === false ? this.state.loading === false ? this.state.userCreated === true ? <p style={{fontSize: '12px'}}> User created </p> : <p style={{fontSize: '12px'}}> </p> : <p style={{fontSize: '12px', color: 'blue'}}>Loading</p> : <p style={{fontSize: '14px', color: 'red'}}>Registration Failed</p>}
+              <Button onClick={() => this.submitUsername()} style={{alignSelf: 'flex-start', marginLeft: '10px', marginTop: '5px'}} raised>Register</Button>
             </Elevation>
           </GridCell>
         </Grid>
@@ -86,4 +82,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Register;

@@ -12,6 +12,14 @@ import { Button, ButtonIcon } from 'rmwc/Button';
 import { Ripple } from 'rmwc/Ripple';
 
 class NavBar extends Component {
+  state = {
+  }
+
+  componentDidMount() {
+    this.setState({
+      userLevel: JSON.parse(window.atob(window.localStorage.token.split('.')[1])).level
+    })
+  }
   render () {
     return (
       <div>
@@ -23,12 +31,23 @@ class NavBar extends Component {
                     <ToolbarMenuIcon use="home"/>
                   </Link>
                 </Ripple>
-              <ToolbarTitle>Dashboard</ToolbarTitle>
+              <ToolbarTitle style={{marginLeft: '15px'}}>Dashboard</ToolbarTitle>
             </ToolbarSection>
             <ToolbarSection alignEnd>
+              {this.state.userLevel > 1 && this.props.register !== "noregister"  ?
+                  <Link to={{ pathname: '/register'}}>
+                    <Button raised
+                      style={{backgroundColor: '#FF3F80', margin: '22px'}}
+                    >
+                      Register new User
+                    </Button>
+                  </Link>
+                :
+                <p></p>
+              }
               {this.props.logout === "logout" ?
                 <Link to='/'>
-                  <Button onClick={() => localStorage.removeItem('token')} style={{marginRight: '10px', backgroundColor: '#E53935'}} raised>Logout</Button>
+                  <Button onClick={() => localStorage.removeItem('token')} style={{margin: '22px', marginLeft: '10px', alignSelf: 'center', backgroundColor: '#E53935'}} raised>Logout</Button>
                 </Link>
                 :
                 <span></span>

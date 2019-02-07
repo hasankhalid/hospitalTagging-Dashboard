@@ -33,6 +33,8 @@ class HospitalView extends Component {
           params: response.data.params,
           columns: response.data.columns,
           rows: response.data.rows,
+          equipmentCount: response.data.rows.length,
+          filteredCount: response.data.rows.length,
           loading: false
         })
       )
@@ -47,7 +49,7 @@ class HospitalView extends Component {
   }
 
   csvFunction = () => {
-    window.open('https://gat-gt.herokuapp.com/api/getcsv/' + window.escape(this.props.location.state.hospital) + '/' + this.state.activeTabIndex);  
+    window.open('https://gat-gt.herokuapp.com/api/getcsv/' + window.escape(this.props.location.state.hospital) + '/' + this.state.activeTabIndex);
   }
 
    downloadFile = (fileName, urlData) => {
@@ -99,7 +101,9 @@ class HospitalView extends Component {
     currDepartment: '',
     value: '1',
     tempOpen: false,
-    qrValue: false
+    qrValue: false,
+    filteredCount: 0,
+    equipmentCount: 0
   }
 
   toggleView = () => {
@@ -149,6 +153,16 @@ class HospitalView extends Component {
     }
   }
 
+  filterMethod = (filter, row, column) => {
+   const id = filter.pivotId || filter.id
+   return row[id] !== undefined ? String(row[id].toLowerCase()).startsWith(filter.value.toLowerCase()) : true
+  }
+
+  countFiltered = () => {
+    this.setState({filteredCount: this.selectTable.getResolvedState().sortedData.length})
+  }
+
+
   updateValues = (typeID) => {
       this.setState({
         loading: true,
@@ -162,6 +176,8 @@ class HospitalView extends Component {
           params: response.data.params,
           columns: response.data.columns,
           rows: response.data.rows,
+          equipmentCount: response.data.rows.length,
+          filteredCount: response.data.rows.length,
           loading: false
         })
       )
@@ -205,6 +221,10 @@ class HospitalView extends Component {
             >
               Export Selected Data
             </Button>
+            <div style={{display: 'flex', flexWrap: 'wrap'}}>
+              <p style={{marginLeft: '5px'}}>Total Count: {this.state.equipmentCount}</p>
+              <p style={{marginLeft: '5px'}}>Filtered Count: {this.state.filteredCount}</p>
+            </div>
             </div>
             :
             <div>
@@ -239,9 +259,14 @@ class HospitalView extends Component {
           <Elevation z={5}>
             <ReactTable
             className="highlight"
+              ref={(r) => {
+                this.selectTable = r;
+              }}
               data={this.state.rows}
               columns={this.state.columns}
               loading={this.state.loading}
+              defaultFilterMethod={this.filterMethod}
+              onFilteredChange={this.countFiltered}
               defaultPageSize={100}
               pageSizeOptions={[20, 50, 100, 200, 300]}
               filterable={true}
