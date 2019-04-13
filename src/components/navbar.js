@@ -16,9 +16,11 @@ class NavBar extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      userLevel: JSON.parse(window.atob(window.localStorage.token.split('.')[1])).level
-    })
+    if (window.localStorage.token) {
+      this.setState({
+        userLevel: JSON.parse(window.atob(window.localStorage.token.split('.')[1])).level
+      })
+    }
   }
   render () {
     return (
