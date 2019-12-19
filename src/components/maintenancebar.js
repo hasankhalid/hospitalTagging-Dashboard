@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Grid, GridCell } from 'rmwc/Grid';
+import { Grid, GridCell } from '@rmwc/grid';
 import axios from 'axios'
 
 class MaintenanceChart extends Component {
@@ -19,7 +19,7 @@ class MaintenanceChart extends Component {
     return (
       <Grid>
       <GridCell span = "12">
-        <h2 style={{color: '#303F9F'}}>Equipment Maintenance Status Summary by Hospital</h2>
+        <h2 style={{color: '#303F9F', fontWeight: '500'}}>Equipment Maintenance Status Summary by Hospital</h2>
         <ResponsiveContainer width='100%' height={300}>
           <BarChart width={600} height={300} data={this.state.data}
                 margin={{top: 20, right: 30, left: 20, bottom: 5}}>
@@ -28,8 +28,8 @@ class MaintenanceChart extends Component {
             <CartesianGrid strokeDasharray="3 3"/>
             <Tooltip/>
             <Legend />
-            <Bar isAnimationActive={false} barSize={30} dataKey="Maintained" stackId="a" fill="#673AB7" />
-            <Bar isAnimationActive={false} barSize={30} dataKey="NotMaintained" stackId="a" fill="#FF4081" />
+            <Bar isAnimationActive={false} barSize={30} dataKey="Maintained" stackId="a" fill="#6200ee" />
+            <Bar isAnimationActive={false} barSize={30} dataKey="NotMaintained" stackId="a" fill="#f44336" />
           </BarChart>
         </ResponsiveContainer>
       </GridCell>

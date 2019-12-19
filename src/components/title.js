@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, GridCell } from 'rmwc/Grid';
+import { Grid, GridCell } from '@rmwc/grid';
 
 class Title extends Component {
   render () {
@@ -8,11 +8,11 @@ class Title extends Component {
         <GridCell span="12">
           <div className="titleWrapper">
             <div className="imageCenter">
-              <img alt="Government of Punjab Logo" className ="govLogo" src="http://xpertnetworks.net/wp-content/uploads/2015/05/PESSI-Logo-260x300.jpg"/>
+              <img alt="Government of Punjab Logo" className ="govLogo" src="https://paperads.com/uploads/co_img/1523344571.jpg"/>
             </div>
             <div className="textCenter">
-              <h1 style={{color: '#303F9F'}}>Tagging of Biomedical Equipment</h1>
-              <h4 style={{color: '#303F9F'}}>Punjab Employees Social Security Institution | © 2018 </h4>
+              <h1 style={{color: '#616161', fontWeight: '400', marginBottom: '15px'}}>Tagging of Biomedical Equipment</h1>
+              <p style={{color: '#303F9F'}}>Punjab Employees Social Security Institution | © 2019</p>
             </div>
           </div>
         </GridCell>

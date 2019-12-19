@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { LinearProgress } from 'rmwc/LinearProgress';
-import { Grid, GridCell } from 'rmwc/Grid';
-import { Button } from 'rmwc/Button'
+import { LinearProgress } from '@rmwc/linear-progress';
+import { Grid, GridCell } from '@rmwc/grid';
+import { Button } from '@rmwc/button'
 import axios from 'axios'
 
 class Reach extends Component {
@@ -28,11 +28,11 @@ class Reach extends Component {
     return (
       <Grid>
         <GridCell span="12">
-          <h2 style={{color: '#303F9F'}}>Hospitals Reached</h2>
+          <h2 style={{color: '#303F9F', fontWeight: '500'}}>Hospitals Reached</h2>
           <LinearProgress progress={this.state.reach}></LinearProgress>
         </GridCell>
         <GridCell span="12">
-          <Button style={{backgroundColor: '#FF3F80'}} onClick={(e) => this.Scroll()} unelevated>View Hospitals</Button>
+          <Button style={{backgroundColor: 'rgb(138, 138, 138)'}} onClick={(e) => this.Scroll()} unelevated>View Hospitals</Button>
         </GridCell>
       </Grid>
     )

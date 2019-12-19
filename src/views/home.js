@@ -7,17 +7,16 @@ import StackedBarChart from '../components/warrantybar'
 import NavBar from '../components/navbar'
 import MaintenanceChart from '../components/maintenancebar'
 import {Redirect} from 'react-router'
-import { Button } from 'rmwc/Button'
-import { Link } from 'react-router-dom'
-
 
 class Home extends Component {
   state = {
+    hospital: 'All'
   }
 
   componentDidMount() {
     this.setState({
-      userLevel: JSON.parse(window.atob(window.localStorage.token.split('.')[1])).level
+      userLevel: JSON.parse(window.atob(window.localStorage.token.split('.')[1])).level,
+      hospital: JSON.parse(window.atob(window.localStorage.token.split('.')[1])).hospital
     })
   }
 
@@ -29,11 +28,22 @@ class Home extends Component {
       <div>
         <NavBar logout='logout'/>
         <Title/>
-        <Reach/>
-        <ComposedChart/>
-        <StackedBarChart/>
-        <MaintenanceChart/>
-        <HospitalList/>
+        {this.state.hospital === 'All' || this.state.hospital === null ?
+          <div>
+            <Reach/>
+            <ComposedChart/>
+            <StackedBarChart/>
+            <MaintenanceChart/>
+          </div>
+          :
+          <div style={{display: 'none'}}>
+            <Reach/>
+            <ComposedChart/>
+            <StackedBarChart/>
+            <MaintenanceChart/>
+          </div>
+        }
+        <HospitalList hospital={this.state.hospital}/>
       </div>
     )
   }

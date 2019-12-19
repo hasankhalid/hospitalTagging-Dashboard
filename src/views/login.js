@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { Grid, GridCell } from 'rmwc/Grid'
-import { Elevation } from 'rmwc/Elevation';
-import { Link } from 'react-router-dom'
+import { Grid, GridCell } from '@rmwc/grid'
+import { Elevation } from '@rmwc/elevation';
 import Title from '../components/title'
 import axios from 'axios'
-import { TextField} from 'rmwc/TextField';
-import { Button, ButtonIcon } from 'rmwc/Button';
+import { TextField} from '@rmwc/textfield';
+import { Button } from '@rmwc/button';
 import NavBar from '../components/navbar'
 import {Redirect} from 'react-router'
 import logo from '../components/advance.png';
@@ -74,10 +73,12 @@ class Login extends Component {
             <Elevation z={3} style={{width: '250px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingBottom: '15px'}}>
               <img src={logo} className="advanceMain loginadvance"/>
               {}
-              <TextField required onChange={evt => this.setState({'username': evt.target.value})} label="Email."  style={{width: '230px'}}/>
-              <TextField required onChange={evt => this.setState({'password': evt.target.value})} type="password" label="Password." style={{width: '230px'}}/>
+              <div style={{borderRadius: '10px', width: '230px', overflow: 'hidden', border: '1px solid #bdbdbd'}}>
+                <TextField required onChange={evt => this.setState({'username': evt.target.value})} label="Email."  style={{width: '230px'}}/>
+                <TextField required onChange={evt => this.setState({'password': evt.target.value})} type="password" label="Password." style={{width: '230px'}}/>
+              </div>
               {this.state.loginError === false ? this.state.loading === false ? <p style={{fontSize: '12px'}}> </p> : <p style={{fontSize: '12px', color: 'blue'}}>Loading</p> : <p style={{fontSize: '14px', color: 'red'}}>Incorrect Email or Password</p>}
-              <Button onClick={() => this.submitLogin()} style={{alignSelf: 'flex-start', marginLeft: '10px', marginTop: '5px'}} raised>Sign In</Button>
+              <Button trailingIcon="keyboard_arrow_right" onClick={() => this.submitLogin()} style={{alignSelf: 'flex-start', marginLeft: '10px', marginTop: '5px'}} raised>Sign In</Button>
             </Elevation>
           </GridCell>
         </Grid>

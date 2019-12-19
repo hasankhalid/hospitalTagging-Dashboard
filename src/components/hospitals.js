@@ -1,25 +1,22 @@
 import React, { Component } from 'react'
-import { Grid, GridCell } from 'rmwc/Grid'
+import { Grid, GridCell } from '@rmwc/grid'
+import { Typography } from '@rmwc/typography';
 import {
   Card,
-  CardMediaItem,
-  CardPrimary,
-  CardTitle,
-  CardSubtitle,
-  CardSupportingText,
-  CardActions,
-  CardAction,
-  CardHorizontalBlock
-} from 'rmwc/Card';
-import { Elevation } from 'rmwc/Elevation';
+} from '@rmwc/card';
+import { Button } from '@rmwc/button';
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import axios from 'axios';
 
 class HospitalList extends Component {
   componentDidMount(){
     axios.get(`https://gat-gt.herokuapp.com/api/hospitals`)
         .then(response => this.setState({
-          hospitals: response.data.data
+          hospitals: response.data.data.filter(
+            (d)=>{
+              return this.props.hospital === 'All' || this.props.hospital === null || d.name === this.props.hospital
+            }
+          ),
         }))
    }
    state = {
@@ -27,47 +24,43 @@ class HospitalList extends Component {
    }
 
   render () {
-    console.log(this.state.hospitals);
     return (
       <Grid>
         <GridCell span="12">
-          <h2 style={{color: '#303F9F'}}>Hospital List</h2>
+          <h2 style={{color: '#303F9F', fontWeight: '500'}}>Hospital List</h2>
         </GridCell>
           {this.state.hospitals.length > 0 && this.state.hospitals.map((hospital) => (
             <GridCell span="4" key={hospital.name}>
-              <Elevation z={3}>
-                <Card style={{backgroundColor: '#757575'}}>
-                  <CardHorizontalBlock>
-                    <CardPrimary>
-                      <CardTitle large style={{color: '#fff'}}><strong>{hospital.name}</strong></CardTitle>
-                      <CardSubtitle style={{color: '#fff'}}>Visited: {hospital.visited ? 'Yes' : 'No'}</CardSubtitle>
-                    </CardPrimary>
-                    <CardMediaItem src="https://futurehealthbiobank.com/ae-en/wp-content/uploads/sites/50/2016/03/stethoscope-icon.png"/>
-                  </CardHorizontalBlock>
-                  <CardSupportingText>
-                    <span style={{color: '#fff'}}><strong>
-                      Equipment Tagged: <br/>
-                    </strong>
-                      Biomedical Equipment: {hospital.equipmentCount}<br/>
-                      Air Conditioners: {hospital.acCount}<br/>
-                      Generator Conditioners: {hospital.genCount}<br/>
-                      Hospital Equipment: {hospital.wardeqCount}
-                  </span>
-                  </CardSupportingText>
-                  <CardActions>
-                    {hospital.visited ?
-                    <Link to={{ pathname: '/hospital', state: {hospital: hospital.name, id: hospital.hospitalId, serial: hospital.serial, enumId: hospital.enumId}}} className="cardButton">
-                        <CardAction elevated="true" style={{backgroundColor: 'white', color: '#9C27B0'}}>View All</CardAction>
-                    </Link>
-                        :
-                        <CardAction elevated="true" style={{backgroundColor: 'white', color: '#9C27B0'}}>View All</CardAction>
-                    }
-                    <Link className="cardButton" style={{display: 'none'}} to={{ pathname: '/byDepartment', state: { hospital: hospital.name, id: hospital.id} }} >
-                      <CardAction unelevated style={{backgroundColor: '#3F51B5'}}>Browse by Department</CardAction>
-                    </Link>
-                  </CardActions>
+                <Card style={{backgroundColor: '#f5f5f5'}}>
+                  <div style={{ padding: '0 1rem 1rem 1rem' }}>
+                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', paddingTop: '20px'}}>
+                      <div style={{width: '80%'}}>
+                        <Typography use="headline6" tag="h2">{hospital.name}</Typography>
+                      </div>
+                      <img style={{width: '18%'}} src="https://futurehealthbiobank.com/ae-en/wp-content/uploads/sites/50/2016/03/stethoscope-icon.png"/>
+                    </div>
+                    <div>
+                      <span style={{color: '#757575', marginBottom: '10px'}}><strong style={{marginBottom: '10px', fontWeight: '500'}}>
+                        Equipment Tagged: <br/>
+                      </strong></span>
+                      <span style={{color: '#757575'}}>
+                        Biomedical Equipment: {hospital.equipmentCount}<br/>
+                        Air Conditioners: {hospital.acCount}<br/>
+                        Generator Conditioners: {hospital.genCount}<br/>
+                        Hospital Equipment: {hospital.wardeqCount}
+                      </span>
+                    </div>
+                      {hospital.visited ?
+                          <Button raised style={{backgroundColor: '#7b30d1', marginTop: '20px' }}>
+                            <Link style={{color: 'white', textDecoration: 'none'}} to={{ pathname: '/hospital', state: {hospital: hospital.name, id: hospital.hospitalId, serial: hospital.serial, enumId: hospital.enumId}}} className="cardButton">
+                              View All
+                            </Link>
+                          </Button>
+                          :
+                          <Button raised style={{backgroundColor: '#1e88e5', marginTop: '20px' }}>View All</Button>
+                      }
+                  </div>
                 </Card>
-              </Elevation>
             </GridCell>
           ))}
       </Grid>

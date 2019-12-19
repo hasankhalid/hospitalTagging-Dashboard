@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
-import { Grid, GridCell } from 'rmwc/Grid'
-import { TabBar, Tab, TabIcon, TabIconText, TabBarScroller} from 'rmwc/Tabs';
+import { Grid, GridCell } from '@rmwc/grid'
+import { TabBar, Tab} from '@rmwc/tabs';
 
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-import { Elevation } from 'rmwc/Elevation';
-import { Button } from 'rmwc/Button';
+import { Elevation } from '@rmwc/elevation';
+import { Button } from '@rmwc/button';
 
-import { Dialog, DialogSurface, DialogHeader, DialogHeaderTitle, DialogBody,
-         DialogFooter, DialogFooterButton, DialogBackdrop, } from 'rmwc/Dialog';
+import { Dialog, DialogTitle, DialogContent,
+         DialogActions, DialogButton} from '@rmwc/dialog';
 
-import { List, ListItem, ListItemText, ListItemGraphic } from 'rmwc/List';
+import { List, ListItem, ListItemText, ListItemPrimaryText, ListItemSecondaryText, ListItemGraphic } from '@rmwc/list';
 
-import { Drawer, DrawerHeader, DrawerContent } from 'rmwc/Drawer';
+import { Drawer, DrawerHeader, DrawerContent } from '@rmwc/drawer';
 
 import QRCode from 'qrcode.react';
 import axios from 'axios'
@@ -24,6 +24,7 @@ class HospitalView extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0)
+    this.setTitle();
     this.props.location.pathname === '/hospital' ?
       axios.post(`https://gat-gt.herokuapp.com/api/eqbytype`,{
         name: this.props.location.state.hospital,
@@ -43,10 +44,6 @@ class HospitalView extends Component {
         departments: response.data.data
       }))
     }
-
-  componentWillMount() {
-    this.setTitle();
-  }
 
   csvFunction = () => {
     window.open('https://gat-gt.herokuapp.com/api/getcsv/' + window.escape(this.props.location.state.hospital) + '/' + this.state.activeTabIndex);
@@ -197,27 +194,21 @@ class HospitalView extends Component {
         <NavBar logout='logout'/>
         <Grid>
           <GridCell span = "12">
-            <h1 className="title" style={{color: '#303F9F'}}>{this.props.location.state.hospital}</h1>
-            <h2 className="title" style={{color: '#303F9F'}}>All Hospital Equipment by {this.state.title}</h2>
-            <h2 className="title" style={{color: '#303F9F'}}>{this.state.currDepartment}</h2>
+            <h1 className="title" style={{color: '#616161', fontWeight: '500'}}>{this.props.location.state.hospital}</h1>
+            <h2 className="title" style={{color: '#303F9F', fontWeight: '400'}}>All Hospital Equipment by {this.state.title}</h2>
 
             {this.state.title === "Category" ?
             <div>
-            <TabBarScroller>
-            <TabBar
-              activeTabIndex={this.state.activeTabIndex}
-              onChange={evt => this.setState({'activeTabIndex': evt.target.value})}
-              >
-                <Tab onClick={() => this.updateValues(0)} style={{color: '#311B92'}}><TabIcon style={{color: '#311B92'}}>local_hospital</TabIcon><TabIconText> Biomedical Equipment</TabIconText></Tab>
-                <Tab onClick={() => this.updateValues(1)} style={{color: '#311B92'}}><TabIcon style={{color: '#311B92'}}>local_hotel</TabIcon><TabIconText> Hospital Equipment</TabIconText></Tab>
-                <Tab onClick={() => this.updateValues(2)} style={{color: '#311B92'}}><TabIcon style={{color: '#311B92'}}>ac_unit</TabIcon><TabIconText> Air Conditioner</TabIconText></Tab>
-                <Tab onClick={() => this.updateValues(3)} style={{color: '#311B92'}}><TabIcon style={{color: '#311B92'}}>build</TabIcon><TabIconText> Generator</TabIconText></Tab>
-            </TabBar>
-            </TabBarScroller>
+              <TabBar>
+                <Tab onClick={() => this.updateValues(0)} style={{color: '#311B92'}} icon="local_hospital" label="Biomedical Equipment"/>
+                <Tab onClick={() => this.updateValues(1)} style={{color: '#311B92'}} icon="local_hotel" label="Hospital Equipment"/>
+                <Tab onClick={() => this.updateValues(2)} style={{color: '#311B92'}} icon="ac_unit" label="Air Conditioner"/>
+                <Tab onClick={() => this.updateValues(3)} style={{color: '#311B92'}} icon="build" label="Generator"/>
+              </TabBar>
             <Button
               onClick={() => this.csvFunction()}
               raised
-              style={{backgroundColor: '#FF3F80', marginTop: '10px'}}
+              style={{backgroundColor: 'rgb(138, 138, 138)', margin: '25px 0px 10px 0px'}}
             >
               Export Selected Data
             </Button>
@@ -236,7 +227,7 @@ class HospitalView extends Component {
                 Select Department
               </Button>
               <Drawer
-                temporary
+                temporary = "true"
                 open={this.state.tempOpen}
                 onClose={() => this.setState({tempOpen: false})}
               >
@@ -277,83 +268,85 @@ class HospitalView extends Component {
                 }}}}
             />
             </Elevation>
+
             <Dialog
               open={this.state.emptyDialogOpen}
               onClose={evt => this.setState({emptyDialogOpen: false})}
             >
-              <DialogSurface>
-                <DialogHeader>
-                  <DialogHeaderTitle>Bad News</DialogHeaderTitle>
-                </DialogHeader>
-                <DialogBody>This is a dead end. This row is empty. Please go back and select a valid row</DialogBody>
-                <DialogFooter>
-                    <DialogFooterButton accept>Close</DialogFooterButton>
-                </DialogFooter>
-              </DialogSurface>
-              <DialogBackdrop />
+              <DialogTitle>Bad News</DialogTitle>
+              <DialogContent>This is a dead end. This row is empty. Please go back and select a valid row</DialogContent>
+              <DialogActions>
+                <DialogButton action="close">Close</DialogButton>
+              </DialogActions>
             </Dialog>
+
             <Dialog
               open={this.state.standardDialogOpen}
               onClose={evt => this.setState({standardDialogOpen: false})}
             >
-              <DialogSurface>
-                <DialogHeader>
-                  <DialogHeaderTitle>Equipment</DialogHeaderTitle>
-                  <Button onClick={(e) =>this.toggleView()} dense>Switch View</Button>
-                </DialogHeader>
+                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                  <DialogTitle>Equipment</DialogTitle>
+                  <Button style={{marginRight: '24px'}} onClick={(e) =>this.toggleView()} dense>Switch View</Button>
+                </div>
                 {this.state.viewDetail === true ?
-                <DialogBody>
+                <DialogContent>
                   <h4>These are equipment details</h4>
                   <div className = "listContain">
                     <div className = "list">
-                      <List nonInteractive>
-                      {firstHalf.length > 0 && firstHalf.map((param) => (
-                        <ListItem key={param.label}>
-                          <ListItemGraphic>{param.icon}</ListItemGraphic>
-                          <ListItemText className="scroll">{param.label + ": " + this.returnLabelValue(param.accessor)}</ListItemText>
+                      <List nonInteractive twoLine>
+                      {firstHalf.length > 0 && firstHalf.map((param, index) => (
+                        <ListItem key={param.label + index}>
+                          <ListItemGraphic icon={param.icon}></ListItemGraphic>
+                          <ListItemText>
+                            <ListItemPrimaryText>{param.label}</ListItemPrimaryText>
+                            <ListItemSecondaryText>{this.returnLabelValue(param.accessor)}</ListItemSecondaryText>
+                          </ListItemText>
                         </ListItem>
                       ))}
                       </List>
                     </div>
                     <div className = "list">
-                      <List nonInteractive>
-                      {secondHalf.length > 0 && secondHalf.map((param) => (
-                        <ListItem key={param.label}>
-                          <ListItemGraphic>{param.icon}</ListItemGraphic>
-                          <ListItemText className="scroll">{param.label + ": " + this.returnLabelValue(param.accessor)}</ListItemText>
+                      <List nonInteractive twoLine>
+                      {secondHalf.length > 0 && secondHalf.map((param, index) => (
+                        <ListItem key={param.label + index}>
+                          <ListItemGraphic icon={param.icon}></ListItemGraphic>
+                          <ListItemText>
+                            <ListItemPrimaryText>{param.label}</ListItemPrimaryText>
+                            <ListItemSecondaryText>{this.returnLabelValue(param.accessor)}</ListItemSecondaryText>
+                          </ListItemText>
                         </ListItem>
                       ))}
                     </List>
                   </div>
                   </div>
-                </DialogBody>
+                </DialogContent>
                 :
-                <DialogBody>
+                <DialogContent>
                   <div className = "modalImage">
-                    <div>
-                      <h3>Equipment Image</h3>
-                      <div style={{height: '280px'}}>
-                        <img style={{maxWidth: '100%', maxHeight: '100%'}} src={this.state.currValues.picUrl} alt="equipment snapshot"/>
+                    <div className="modalImage_first_child">
+                      <h3 style={{fontWeight: '500', marginTop: '0px', marginBottom: '15px'}}>Equipment Image</h3>
+                      <div>
+                        <img style={{maxWidth: '100%', maxHeight: '100%', borderRadius: '10px'}} src={this.state.currValues.picUrl} alt="equipment snapshot"/>
                       </div>
                     </div>
-                    <div>
-                      <h3> QR Code </h3>
-                      <QRCode
-                        value={this.state.qrValue === false ? 'N/A' : this.state.currValues[this.state.columns[0].accessor]}
-                        size={270}
-                        bgColor={"#F2F1EF"}
-                        fgColor={"#5B3256"}
-                        level={"L"}
-                      />
+                    <div className="modalImage_second_child">
+                      <h3 style={{fontWeight: '500', marginTop: '0px', marginBottom: '15px'}}>QR Code</h3>
+                      <div style={{border: '1px solid', borderColor: '#e0e0e0', padding: '6px 6px 0px 6px', borderRadius: '8px'}}>
+                        <QRCode
+                          value={this.state.qrValue === false ? 'N/A' : this.state.currValues[this.state.columns[0].accessor]}
+                          size={170}
+                          bgColor={"#424242"}
+                          fgColor={"#e0e0e0"}
+                          level={"L"}
+                        />
+                      </div>
                     </div>
                   </div>
-                </DialogBody>
+                </DialogContent>
               }
-                <DialogFooter>
-                    <DialogFooterButton cancel>Close</DialogFooterButton>
-                </DialogFooter>
-              </DialogSurface>
-              <DialogBackdrop />
+              <DialogActions>
+                <DialogButton action="close">Close</DialogButton>
+              </DialogActions>
             </Dialog>
           </GridCell>
         </Grid>

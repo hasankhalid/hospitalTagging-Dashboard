@@ -45,14 +45,22 @@
 
 .modalImage {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 5px;
 }
 
+.modalImage_first_child {
+  width: 60%;
+}
+
+.modalImage_second_child {
+  width: 38%;
+}
+
 .list {
   display: flex;
-  width: 50%;
+  width: 100%;
 }
 
 .mdc-list {
@@ -60,12 +68,12 @@
 }
 
 .listContain {
-  display: flex;
 }
 .footer {
-  background-color: #455A64;
+  background-image: linear-gradient(to right bottom,#492e9c,#5830ae,#6931c0,#7b30d1,#8e2de2);
   color: #eee;
   min-height: 10vh;
+  margin-top: 30px;
 }
 
 .title {
@@ -82,7 +90,8 @@
 }
 
 .ReactTable .rt-thead.-header {
-  background-color: #FF3F80;
+  background-color: #7b30d1;
+  margin-bottom: 10px;
   color: white;
   padding: 8px;
   text-decoration: none;
@@ -106,6 +115,10 @@
 .rt-td {
   text-align: right;
   padding: 4px;
+}
+
+.button_text {
+  text-decoration: none !important;
 }
 
 @media screen and (max-width: 643px) {
@@ -146,4 +159,5 @@ canvas {
 
 .loginadvance {
   margin-top: 20px;
+  margin-bottom: 25px;
 }
