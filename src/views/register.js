@@ -70,7 +70,7 @@ class Register extends Component {
             <Elevation z={3} style={{width: '250px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingBottom: '15px'}}>
               <img src={logo} className="advanceMain loginadvance"/>
               {}
-              <div style={{borderRadius: '10px', width: '230px', overflow: 'hidden', border: '1px solid #bdbdbd'}}>
+              <div style={{width: '230px'}}>
                 <TextField required onChange={evt => this.setState({'username': evt.target.value})} label="Username."  style={{width: '230px'}}/>
                 <TextField required onChange={evt => this.setState({'password': evt.target.value})} type="password" label="Password." style={{width: '230px'}}/>
                 <TextField required onChange={evt => this.setState({'level': evt.target.value})} label="Level." type="number" min="0" max="2"  style={{width: '230px'}}/>
