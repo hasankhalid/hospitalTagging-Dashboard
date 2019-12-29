@@ -36,7 +36,7 @@ class Register extends Component {
        password : this.state.password,
        hospital: this.state.hospital,
        access: this.state.access,
-       accessIndex: this.state.accessIndex,
+       level: this.state.accessIndex,
        cnic : '123'
      }).then((response) => {
        if (response.status === 200) {
