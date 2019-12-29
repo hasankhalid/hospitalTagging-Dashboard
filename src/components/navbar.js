@@ -34,7 +34,7 @@ class NavBar extends Component {
               </ToolbarTitle>
             </ToolbarSection>
             <ToolbarSection alignEnd>
-              {this.state.userLevel > 1 && this.props.register !== "noregister" ?
+              {this.state.userLevel === 3 && this.props.register !== "noregister" ?
                   <Button raised
                     style={{backgroundColor: '#f5f5f5', textDecoration: 'none', margin: '22px', color: 'rgb(123, 48, 209)'}} icon="people"
                   >
