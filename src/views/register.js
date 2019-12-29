@@ -20,7 +20,8 @@ class Register extends Component {
      loading: false,
      userCreated: false,
      hospital: 'All',
-     access: 'Dashboard'
+     access: 'Dashboard (Admin)',
+     accessIndex: 3
    }
 
    submitUsername = () => {
@@ -33,9 +34,9 @@ class Register extends Component {
        name : this.state.username,
        username : this.state.username,
        password : this.state.password,
-       level : this.state.level,
        hospital: this.state.hospital,
        access: this.state.access,
+       accessIndex: this.state.accessIndex,
        cnic : '123'
      }).then((response) => {
        if (response.status === 200) {
@@ -75,8 +76,7 @@ class Register extends Component {
               <div style={{width: '230px'}}>
                 <TextField required onChange={evt => this.setState({'username': evt.target.value})} label="Username."  style={{width: '230px'}}/>
                 <TextField required onChange={evt => this.setState({'password': evt.target.value})} type="password" label="Password." style={{width: '230px'}}/>
-                <TextField required onChange={evt => this.setState({'level': evt.target.value})} label="Level." type="number" min="0" max="2"  style={{width: '230px'}}/>
-                <Select style={{width: '230px'}} required onChange={(e) => this.setState({'access': e.target.value})} value={this.state.access} label="Access Rights" options={['Application (Data Entry)', 'Application (Edit)', 'Application (View)', 'Dashboard']}/>
+                <Select style={{width: '230px'}} required onChange={(e) => this.setState({'access': e.target.value, 'accessIndex': e.target.selectedIndex})} value={this.state.access} label="Access Rights" options={['Application (Data Entry)', 'Application (Edit)', 'Application (View)', 'Dashboard (Admin)', 'Dashboard (View Only)']}/>
                 <Select style={{width: '230px'}} required onChange={(e) => this.setState({'hospital': e.target.value})} value={this.state.hospital} label="Hospital" options={['All', 'Nawaz Sharif Social Security Hospital Multan Road Lahore', 'Rehmat-ullil-Alimeen Institute of Cardiology Multan Road Lahore', 'Social Security Hospital Shahdara', 'Social Security Hospital Kot Lakhpat Lahore', 'Social Security Hospital Faisalabad', 'Maternal Newborn and Child Health Centre Faisalabad', 'Social Security Hospital Gujranwala', 'Social Security Hospital Gujrat', 'Social Security Hospital Islamabad', 'Khawaja Fareed Social Security Hospital Multan', 'Social Security Hospital Jauharabad', 'Social Security Hospital Sialkot', 'Social Security Hospital Okara', 'Social Security Hospital Sahiwal', 'Social Security Hospital Sheikhupura', 'Social Security Hospital Jaranwala', 'Social Security Hospital Jang']}/>
               </div>
               {this.state.loginError === false ? this.state.loading === false ? this.state.userCreated === true ? <p style={{fontSize: '12px'}}> User created </p> : <p style={{fontSize: '12px'}}> </p> : <p style={{fontSize: '12px', color: 'blue'}}>Loading</p> : <p style={{fontSize: '14px', color: 'red'}}>Registration Failed</p>}

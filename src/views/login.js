@@ -26,7 +26,8 @@ class Login extends Component {
      })
      axios.post(`https://gat-gt.herokuapp.com/api/login`,{
        username : this.state.username,
-       password : this.state.password
+       password : this.state.password,
+       origin: 'Dash'
      }).then((response) => {
        if (!response.data.token) {
          this.setState({
