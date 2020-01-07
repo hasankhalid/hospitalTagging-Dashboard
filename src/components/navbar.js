@@ -6,7 +6,7 @@ import {
   ToolbarTitle,
   ToolbarMenuIcon,
 } from '@rmwc/toolbar';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 import { Button } from '@rmwc/button';
 
 import { Ripple } from '@rmwc/ripple';
@@ -29,31 +29,56 @@ class NavBar extends Component {
           <ToolbarRow style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
             <ToolbarSection alignStart>
               <ToolbarTitle style={{marginLeft: '15px', display: 'flex', alignItems: 'center', color: 'white'}}>
-                <Ripple accent><Link to="/home" style={{textDecoration: 'none', color: '#eee'}}><ToolbarMenuIcon icon="home"/></Link></Ripple>
+                <Link to='/home' style={{textDecoration: 'none', color: '#eee'}}><ToolbarMenuIcon icon="home"/></Link>
                   <p style={{marginLeft: '10px'}}>Dashboard</p>
               </ToolbarTitle>
             </ToolbarSection>
             <ToolbarSection alignEnd>
-              {this.state.userLevel > 1 && this.props.register !== "noregister" ?
-                  <Button raised
-                    style={{backgroundColor: '#f5f5f5', textDecoration: 'none', margin: '22px', color: 'rgb(123, 48, 209)'}} icon="people"
-                  >
-                    <Link to={{ pathname: '/register'}} className="button_text" style={{color: 'rgb(123, 48, 209)'}}>
-                      Register new User
+              <div style={{display: 'flex'}}>
+                {this.state.userLevel === 3 && this.props.register !== "noregister" ?
+                  <div>
+                    <Link to={{ pathname: '/departments'}} style={{color: 'rgb(123, 48, 209)', textDecoration: 'none'}}>
+                      <Button raised
+                        style={{backgroundColor: '#f5f5f5', textDecoration: 'none', margin: '10px', color: 'rgb(123, 48, 209)'}} icon="account_balance"
+                      >
+                        <div className="button_text" style={{color: 'rgb(123, 48, 209)', textDecoration: 'none'}}>
+                          Manage Departments
+                        </div>
+                      </Button>
                     </Link>
-                  </Button>
-                :
-                <p></p>
-              }
-              {this.props.logout === "logout" ?
-                  <Button icon="exit_to_app" raised onClick={() => localStorage.removeItem('token')} style={{margin: '22px', marginLeft: '10px', alignSelf: 'center', backgroundColor: '#1e88e5', color: '#ffff00' }}>
-                    <Link to='/' className="button_text" style={{color: '#ffff00'}}>
-                      Logout
+                    <Link to={{ pathname: '/manage'}} style={{color: 'rgb(123, 48, 209)', textDecoration: 'none'}}>
+                      <Button raised
+                        style={{backgroundColor: '#f5f5f5', textDecoration: 'none', margin: '10px', color: 'rgb(123, 48, 209)'}} icon="people"
+                      >
+                        <div className="button_text" style={{color: 'rgb(123, 48, 209)', textDecoration: 'none'}}>
+                          Manage Users
+                        </div>
+                      </Button>
                     </Link>
-                  </Button>
-                :
-                <span></span>
-              }
+                    <Link to={{ pathname: '/register'}} style={{color: 'rgb(123, 48, 209)', textDecoration: 'none'}}>
+                      <Button raised
+                        style={{backgroundColor: '#f5f5f5', textDecoration: 'none', margin: '22px', color: 'rgb(123, 48, 209)'}} icon="people"
+                      >
+                        <div className="button_text" style={{color: 'rgb(123, 48, 209)'}}>
+                          Register new User
+                        </div>
+                      </Button>
+                    </Link>
+                  </div>
+                  :
+                  <p></p>
+                }
+                {this.props.logout === "logout" ?
+                    <Link to='/' className="button_text" style={{color: '#ffff00', textDecoration: 'none'}}>
+                      <Button icon="exit_to_app" raised onClick={() => localStorage.removeItem('token')} style={{margin: '22px', marginLeft: '10px', alignSelf: 'center', backgroundColor: '#1e88e5', color: '#ffff00' }}>
+                        Logout
+                      </Button>
+                    </Link>
+
+                  :
+                  <span></span>
+                }
+              </div>
             </ToolbarSection>
           </ToolbarRow>
         </Toolbar>

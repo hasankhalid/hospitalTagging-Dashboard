@@ -13,9 +13,7 @@ class HospitalList extends Component {
     axios.get(`https://gat-gt.herokuapp.com/api/hospitals`)
         .then(response => this.setState({
           hospitals: response.data.data.filter(
-            (d)=>{
-              return this.props.hospital === 'All' || this.props.hospital === null || d.name === this.props.hospital
-            }
+            (d) => {return this.props.hospital === 'All' || this.props.hospital === null || d.name === this.props.hospital}
           ),
         }))
    }

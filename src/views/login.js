@@ -19,7 +19,7 @@ class Login extends Component {
      loading: false
    }
 
-   submitLogin = () => {
+   submitLogin = (e) => {
      this.setState({
        loading: true,
        loginError: false
@@ -56,13 +56,8 @@ class Login extends Component {
 
 
   render () {
-    if(window.localStorage.token) {
-      this.setState({
-        toHome: true
-      })
-    }
 
-    if (this.state.toHome === true) {
+    if (window.localStorage.token) {
       return <Redirect to='/home' />
     }
     return (
@@ -73,13 +68,12 @@ class Login extends Component {
           <GridCell span="12" style={{display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '50px'}}>
             <Elevation z={3} style={{width: '250px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', paddingBottom: '15px'}}>
               <img src={logo} className="advanceMain loginadvance"/>
-              {}
               <div style={{width: '230px'}}>
-                <TextField required onChange={evt => this.setState({'username': evt.target.value})} label="Email."  style={{width: '230px'}}/>
-                <TextField required onChange={evt => this.setState({'password': evt.target.value})} type="password" label="Password." style={{width: '230px'}}/>
+                <TextField required onChange={(evt) => this.setState({'username': evt.target.value})} label="Email."  style={{width: '230px'}}/>
+                <TextField required onChange={(evt) => this.setState({'password': evt.target.value})} type="password" label="Password." style={{width: '230px'}}/>
               </div>
               {this.state.loginError === false ? this.state.loading === false ? <p style={{fontSize: '12px'}}> </p> : <p style={{fontSize: '12px', color: 'blue'}}>Loading</p> : <p style={{fontSize: '14px', color: 'red'}}>Incorrect Email or Password</p>}
-              <Button trailingIcon="keyboard_arrow_right" onClick={() => this.submitLogin()} style={{alignSelf: 'flex-start', marginLeft: '10px', marginTop: '5px'}} raised>Sign In</Button>
+              <Button trailingIcon="keyboard_arrow_right" onClick={(e) => this.submitLogin(e)} style={{alignSelf: 'flex-start', marginLeft: '10px', marginTop: '5px'}} raised>Sign In</Button>
             </Elevation>
           </GridCell>
         </Grid>

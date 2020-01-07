@@ -8,9 +8,9 @@ import { Button } from '@rmwc/button';
 import NavBar from '../components/navbar'
 import logo from '../components/advance.png';
 import { Select } from '@rmwc/select';
+import {Redirect} from 'react-router'
 
-
-class Register extends Component {
+class Edit extends Component {
    state = {
      username: '',
      password: '',
@@ -21,7 +21,25 @@ class Register extends Component {
      userCreated: false,
      hospital: 'All',
      access: 'Dashboard (Admin)',
-     accessIndex: 3
+     accessIndex: 3,
+     options: ['Application (Data Entry)', 'Application (Edit)', 'Application (View)', 'Dashboard (Admin)', 'Dashboard (View Only)'],
+     redirect: false,
+   }
+
+   componentDidMount() {
+     if (this.props.location.user) {
+       this.setState({
+         username: this.props.location.user.username,
+         accessIndex: this.props.location.user.level,
+         hospital: this.props.location.user.hospital,
+         redirect: false
+       })
+     }
+     else {
+      this.setState({
+        redirect: true
+      })
+     }
    }
 
    submitUsername = () => {
@@ -30,14 +48,12 @@ class Register extends Component {
        loginError: false
      })
 
-     axios.post(`https://gat-gt.herokuapp.com/api/register`,{
-       name : this.state.username,
-       username : this.state.username,
-       password : this.state.password,
-       hospital: this.state.hospital,
-       access: this.state.access,
-       level: this.state.accessIndex,
-       cnic : '123'
+     axios.post(`https://gat-gt.herokuapp.com/api/updateuser`,{
+       newUsername : this.state.username,
+       newPassword : this.state.password,
+       newHospital: this.state.hospital,
+       newLevel: this.state.accessIndex,
+       username : this.props.location.user.name
      }).then((response) => {
        if (response.status === 200) {
          this.setState({
@@ -64,6 +80,9 @@ class Register extends Component {
    }
 
   render () {
+    if (this.state.redirect === true ) {
+      return <Redirect to='/manage' />
+    }
     return (
       <div>
         <NavBar register="noregister" logout="logout"/>
@@ -74,12 +93,12 @@ class Register extends Component {
               <img src={logo} className="advanceMain loginadvance"/>
               {}
               <div style={{width: '230px'}}>
-                <TextField required onChange={evt => this.setState({'username': evt.target.value})} label="Username."  style={{width: '230px'}}/>
+                <TextField required onChange={evt => this.setState({'username': evt.target.value})} label="Username." value={this.state.username}  style={{width: '230px'}}/>
                 <TextField required onChange={evt => this.setState({'password': evt.target.value})} type="password" label="Password." style={{width: '230px'}}/>
-                <Select style={{width: '230px'}} required onChange={(e) => this.setState({'access': e.target.value, 'accessIndex': e.target.selectedIndex})} value={this.state.access} label="Access Rights" options={['Application (Data Entry)', 'Application (Edit)', 'Application (View)', 'Dashboard (Admin)', 'Dashboard (View Only)']}/>
+                <Select style={{width: '230px'}} required onChange={(e) => this.setState({'access': e.target.value, 'accessIndex': e.target.selectedIndex})} value={this.state.options[this.state.accessIndex]} label="Access Rights" options={['Application (Data Entry)', 'Application (Edit)', 'Application (View)', 'Dashboard (Admin)', 'Dashboard (View Only)']}/>
                 <Select style={{width: '230px'}} required onChange={(e) => this.setState({'hospital': e.target.value})} value={this.state.hospital} label="Hospital" options={['All', 'Nawaz Sharif Social Security Hospital Multan Road Lahore', 'Rehmat-ullil-Alimeen Institute of Cardiology Multan Road Lahore', 'Social Security Hospital Shahdara', 'Social Security Hospital Kot Lakhpat Lahore', 'Social Security Hospital Faisalabad', 'Maternal Newborn and Child Health Centre Faisalabad', 'Social Security Hospital Gujranwala', 'Social Security Hospital Gujrat', 'Social Security Hospital Islamabad', 'Khawaja Fareed Social Security Hospital Multan', 'Social Security Hospital Jauharabad', 'Social Security Hospital Sialkot', 'Social Security Hospital Okara', 'Social Security Hospital Sahiwal', 'Social Security Hospital Sheikhupura', 'Social Security Hospital Jaranwala', 'Social Security Hospital Jang']}/>
               </div>
-              {this.state.loginError === false ? this.state.loading === false ? this.state.userCreated === true ? <p style={{fontSize: '12px'}}> User created </p> : <p style={{fontSize: '12px'}}> </p> : <p style={{fontSize: '12px', color: 'blue'}}>Loading</p> : <p style={{fontSize: '14px', color: 'red'}}>Registration Failed</p>}
+              {this.state.loginError === false ? this.state.loading === false ? this.state.userCreated === true ? <p style={{fontSize: '12px'}}> User updated </p> : <p style={{fontSize: '12px'}}> </p> : <p style={{fontSize: '12px', color: 'blue'}}>Loading</p> : <p style={{fontSize: '14px', color: 'red'}}>Updating Failed</p>}
               <Button onClick={() => this.submitUsername()} style={{alignSelf: 'flex-start', marginLeft: '10px', marginTop: '5px'}} raised>Register</Button>
             </Elevation>
           </GridCell>
@@ -89,4 +108,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default Edit;

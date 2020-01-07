@@ -6,6 +6,9 @@ import HospitalView from './views/hospital'
 import Footer from './components/footer'
 import Login from './views/login'
 import Register from './views/register'
+import Edit from './views/edit'
+import Manage from './views/manage'
+import ManageDeps from './views/managedepartments'
 
 class App extends Component {
   render() {
@@ -16,6 +19,9 @@ class App extends Component {
           <Route exact path ="/home" component={Home}/>
           <Route exact path ="/hospital" component={HospitalView}/>
           <Route exact path ="/register" component={Register}/>
+          <Route exact path ="/manage" component={Manage}/>
+          <Route exact path ="/departments" component={ManageDeps}/>
+          <Route exact path ="/edit" component={Edit}/>
         </div>
       <Footer/>
       </div>

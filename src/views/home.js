@@ -28,7 +28,7 @@ class Home extends Component {
       <div>
         <NavBar logout='logout'/>
         <Title/>
-        {this.state.hospital === 'All' || this.state.hospital === null ?
+        {this.state.hospital === 'All' ?
           <div>
             <Reach/>
             <ComposedChart/>

@@ -115,7 +115,6 @@ class HospitalView extends Component {
     this.setState({
       currDepartment: name
     })
-    console.log(value);
     axios.post(`https://gat-gt.herokuapp.com/api/eqbydepartment`,{
       id: 0,
       department:0
@@ -125,7 +124,6 @@ class HospitalView extends Component {
       rows: response.data.rows,
       loading: false
     }))
-    console.log(this.state.currDepartment)
   }
 
   setCurrValues = (row) => {
