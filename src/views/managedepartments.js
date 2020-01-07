@@ -100,7 +100,7 @@ class ManageDeps extends Component {
 
    addDepartment = () => {
      const depts = this.state.deps;
-     depts.push("New Department");
+     depts.unshift("New Department");
      this.setState({
        deps: depts
      })
@@ -124,7 +124,7 @@ class ManageDeps extends Component {
             <Button icon="account_balance" raised style={{backgroundColor: '#8bc34a', marginRight: '20px', color: 'white'}} onClick={() => this.addDepartment()}>
                 Add Department
             </Button>
-            <p style={{fontSize: '12px', fontWeight: '500'}}>Please click the above button to add a new department.<span style={{color: '#e53935'}}> The new department will be added in the end of the list.</span></p>
+            <p style={{fontSize: '12px', fontWeight: '500'}}>Please click the above button to add a new department.</p>
           </GridCell>
           {this.state.deps.length > 0 && this.state.deps.map((dep, index) => (
             <GridCell key={index} span="6">
