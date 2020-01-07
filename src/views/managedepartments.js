@@ -98,6 +98,14 @@ class ManageDeps extends Component {
      })
    }
 
+   addDepartment = () => {
+     const depts = this.state.deps;
+     depts.push("New Department");
+     this.setState({
+       deps: depts
+     })
+   }
+
   render () {
     return (
       <div>
@@ -113,6 +121,10 @@ class ManageDeps extends Component {
               {this.state.updateError === false ? this.state.loading === false ? this.state.depsUpdated === true ? <p style={{fontSize: '12px'}}> Departments have been updated online </p> : <p style={{fontSize: '12px'}}> </p> : <p style={{fontSize: '12px', color: 'blue'}}>Updating</p> : <p style={{fontSize: '14px', color: 'red'}}>Updation Failed</p>}
             </div>
             <p style={{fontSize: '12px', fontWeight: '500'}}>Please click the above button after making your desired changes to push them on to the server</p>
+            <Button icon="account_balance" raised style={{backgroundColor: '#8bc34a', marginRight: '20px', color: 'white'}} onClick={() => this.addDepartment()}>
+                Add Department
+            </Button>
+            <p style={{fontSize: '12px', fontWeight: '500'}}>Please click the above button to add a new department.<span style={{color: '#e53935'}}> The new department will be added in the end of the list.</span></p>
           </GridCell>
           {this.state.deps.length > 0 && this.state.deps.map((dep, index) => (
             <GridCell key={index} span="6">
